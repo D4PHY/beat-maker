@@ -2,15 +2,29 @@ class DrumKit {
   constructor() {
     this.pads = document.querySelectorAll(".pad");
     this.btnPlay = document.querySelector(".btn-play");
+    this.kickSound = document.querySelector(".kick-sound");
+    this.snareSound = document.querySelector(".snare-sound");
+    this.hihatSound = document.querySelector(".hihat-sound");
     this.index = 0;
-    this.bpm = 60;
+    this.bpm = 180;
     this.soundLoop;
   }
 
   repeat() {
     let step = this.index % 8;
-    const activePads = document.querySelectorAll(`.b${step}`);
-    console.log(activePads);
+    const activeBar = document.querySelectorAll(`.b${step}`);
+    console.log(activeBar);
+    activeBar.forEach((pad) => {
+      if (pad.classList.contains("active")) {
+        if (pad.classList.contains("kick-pad")) {
+          this.kickSound.play();
+        } else if (pad.classList.contains("snare-pad")) {
+          this.snareSound.play();
+        } else if (pad.classList.contains("hihat-pad")) {
+          this.hihatSound.play();
+        }
+      }
+    });
     this.index++;
   }
 
@@ -26,9 +40,22 @@ class DrumKit {
     clearInterval(this.soundLoop);
     this.btnPlay.textContent = "Play";
   }
+
+  animatePad() {}
 }
 
 const drumKit = new DrumKit();
+
+drumKit.pads.forEach((pad) => {
+  pad.addEventListener("click", () => {
+    if (!pad.classList.contains("active")) {
+      pad.classList.add("active");
+    } else {
+      pad.classList.remove("active");
+    }
+  });
+});
+
 drumKit.btnPlay.addEventListener("click", () => {
   if (drumKit.btnPlay.textContent === "Play") {
     drumKit.start();
@@ -36,4 +63,3 @@ drumKit.btnPlay.addEventListener("click", () => {
     drumKit.stop();
   }
 });
-// drumKit.start();
