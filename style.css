@@ -110,3 +110,7 @@ svg {
 .btn-play:hover {
   background: rgb(112, 111, 111);
 }
+
+.animated-pad {
+  transform: scale(1.2);
+}

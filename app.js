@@ -5,15 +5,26 @@ class DrumKit {
     this.kickSound = document.querySelector(".kick-sound");
     this.snareSound = document.querySelector(".snare-sound");
     this.hihatSound = document.querySelector(".hihat-sound");
-    this.index = 0;
-    this.bpm = 180;
+    this.activeIndex = 0;
+    this.prevIndex = -1;
+    this.bpm = 240;
     this.soundLoop;
   }
 
   repeat() {
-    let step = this.index % 8;
+    let step = this.activeIndex % 8;
+    let prevStep = this.prevIndex % 8;
+
     const activeBar = document.querySelectorAll(`.b${step}`);
-    console.log(activeBar);
+    const prevBar = document.querySelectorAll(`.b${prevStep}`);
+
+    activeBar.forEach((bar) => {
+      bar.classList.add("animated-pad");
+      prevBar.forEach((bar) => {
+        bar.classList.remove("animated-pad");
+      });
+    });
+
     activeBar.forEach((pad) => {
       if (pad.classList.contains("active")) {
         if (pad.classList.contains("kick-pad")) {
@@ -25,7 +36,9 @@ class DrumKit {
         }
       }
     });
-    this.index++;
+
+    this.activeIndex++;
+    this.prevIndex++;
   }
 
   start() {
