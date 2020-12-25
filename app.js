@@ -5,10 +5,21 @@ class DrumKit {
     this.kickSound = document.querySelector(".kick-sound");
     this.snareSound = document.querySelector(".snare-sound");
     this.hihatSound = document.querySelector(".hihat-sound");
+    this.select = document.querySelectorAll("select");
+    // this.kickSelect = document.getElementById("kick-select");
+    // this.snareSelect = document.getElementById("snare-select");
+    // this.hihatSelect = document.getElementById("hihat-select");
+    // this.kickLib = [
+    //   "./sounds-library/kick-dry.wav",
+    //   "./sounds-library/kick-big.wav",
+    //   "./sounds-library/kick-808.wav",
+    // ];
+    // this.snareLib = [];
+    // this.hihatLib = [];
     this.activeIndex = 0;
     this.prevIndex = -1;
     this.bpm = 240;
-    this.soundLoop;
+    this.isPlaying = null;
   }
 
   repeat() {
@@ -23,6 +34,8 @@ class DrumKit {
       prevBar.forEach((bar) => {
         bar.classList.remove("animated-pad");
       });
+      // THINK HOW TO REFACTOR THIS FEATURE: YOU MIGHT USE THE INDEX
+      // OF THE ACTIVE BAR TO GET THE PREVIOUS BAR AND ANIMATE THAT???
     });
 
     activeBar.forEach((pad) => {
@@ -44,17 +57,25 @@ class DrumKit {
   start() {
     this.btnPlay.textContent = "Stop";
     const interval = (60 / this.bpm) * 1000;
-    this.soundLoop = setInterval(() => {
+    this.isPlaying = setInterval(() => {
       this.repeat();
     }, interval);
   }
 
   stop() {
-    clearInterval(this.soundLoop);
+    clearInterval(this.isPlaying);
     this.btnPlay.textContent = "Play";
   }
 
-  animatePad() {}
+  changeSound(event) {
+    if (event.target.closest("#kick-select")) {
+      this.kickSound.src = event.target.value;
+    } else if (event.target.closest("#snare-select")) {
+      this.snareSound.src = event.target.value;
+    } else if (event.target.closest("#hihat-select")) {
+      this.hihatSound.src = event.target.value;
+    }
+  }
 }
 
 const drumKit = new DrumKit();
@@ -75,4 +96,10 @@ drumKit.btnPlay.addEventListener("click", () => {
   } else {
     drumKit.stop();
   }
+});
+
+drumKit.select.forEach((select) => {
+  select.addEventListener("click", (event) => {
+    drumKit.changeSound(event);
+  });
 });
