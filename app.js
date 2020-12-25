@@ -35,7 +35,7 @@ class DrumKit {
         bar.classList.remove("animated-pad");
       });
       // THINK HOW TO REFACTOR THIS FEATURE: YOU MIGHT USE THE INDEX
-      // OF THE ACTIVE BAR TO GET THE PREVIOUS BAR AND ANIMATE THAT???
+      // OF THE ACTIVE BARS TO GET THE PREVIOUS BAR AND ANIMATE THOSE???
     });
 
     activeBar.forEach((pad) => {
