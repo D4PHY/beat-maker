@@ -22,7 +22,7 @@ class DrumKit {
     // this.hihatLib = [];
     this.activeIndex = 0;
     this.prevIndex = -1;
-    this.bpm = 240;
+    this.bpm = 420;
     this.isPlaying = null;
   }
 
@@ -45,10 +45,13 @@ class DrumKit {
     activeBar.forEach((pad) => {
       if (pad.classList.contains("active")) {
         if (pad.classList.contains("kick-pad")) {
+          this.kickSound.fastSeek(0);
           this.kickSound.play();
         } else if (pad.classList.contains("snare-pad")) {
+          this.snareSound.fastSeek(0);
           this.snareSound.play();
         } else if (pad.classList.contains("hihat-pad")) {
+          this.hihatSound.fastSeek(0);
           this.hihatSound.play();
         }
       }
