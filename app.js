@@ -6,9 +6,13 @@ class DrumKit {
     this.snareSound = document.querySelector(".snare-sound");
     this.hihatSound = document.querySelector(".hihat-sound");
     this.select = document.querySelectorAll("select");
-    // this.kickSelect = document.getElementById("kick-select");
-    // this.snareSelect = document.getElementById("snare-select");
-    // this.hihatSelect = document.getElementById("hihat-select");
+    // // WRITE A SCRIPT IN NODE WHICH WILL READ SOUND-LIBRARY FOLDER AND WILL
+    // // WRITE A JSON THAT WE CAN FETCH AT A LATER TIME!!!
+    // // https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
+    // // 'WRITE' AND 'READ A DIRECTORY'
+    this.kickSelect = document.getElementById("kick-select");
+    this.snareSelect = document.getElementById("snare-select");
+    this.hihatSelect = document.getElementById("hihat-select");
     // this.kickLib = [
     //   "./sounds-library/kick-dry.wav",
     //   "./sounds-library/kick-big.wav",
@@ -67,6 +71,38 @@ class DrumKit {
     this.btnPlay.textContent = "Play";
   }
 
+  createSoundOption(soundName) {
+    const option = document.createElement("option");
+    option.value = `./sounds-library/${soundName}`;
+    option.textContent = this.formatSoundName(soundName);
+    return option;
+  }
+
+  formatSoundName(soundName) {
+    const name = soundName.split("-").join(" ");
+    console.log(name);
+    const nameCap = name.charAt(0).toUpperCase() + name.slice(1);
+    const nameCut = nameCap.replace(".wav", "");
+    return nameCut;
+  }
+
+  async addSounds() {
+    const dataFetch = await fetch("./sounds-lib.json");
+    const data = await dataFetch.json();
+    data.forEach((sound) => {
+      if (sound.includes("kick")) {
+        const option = this.createSoundOption(sound);
+        this.kickSelect.appendChild(option);
+      } else if (sound.includes("snare")) {
+        const option = this.createSoundOption(sound);
+        this.snareSelect.appendChild(option);
+      } else if (sound.includes("hihat")) {
+        const option = this.createSoundOption(sound);
+        this.hihatSelect.appendChild(option);
+      }
+    });
+  }
+
   changeSound(event) {
     if (event.target.closest("#kick-select")) {
       this.kickSound.src = event.target.value;
@@ -103,3 +139,5 @@ drumKit.select.forEach((select) => {
     drumKit.changeSound(event);
   });
 });
+
+drumKit.addSounds();
