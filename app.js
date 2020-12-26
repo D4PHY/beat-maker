@@ -6,43 +6,26 @@ class DrumKit {
     this.snareSound = document.querySelector(".snare-sound");
     this.hihatSound = document.querySelector(".hihat-sound");
     this.select = document.querySelectorAll("select");
-    // // WRITE A SCRIPT IN NODE WHICH WILL READ SOUND-LIBRARY FOLDER AND WILL
-    // // WRITE A JSON THAT WE CAN FETCH AT A LATER TIME!!!
-    // // https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
-    // // 'WRITE' AND 'READ A DIRECTORY'
     this.kickSelect = document.getElementById("kick-select");
     this.snareSelect = document.getElementById("snare-select");
     this.hihatSelect = document.getElementById("hihat-select");
-    // this.kickLib = [
-    //   "./sounds-library/kick-dry.wav",
-    //   "./sounds-library/kick-big.wav",
-    //   "./sounds-library/kick-808.wav",
-    // ];
-    // this.snareLib = [];
-    // this.hihatLib = [];
     this.activeIndex = 0;
-    this.prevIndex = -1;
     this.bpm = 420;
     this.isPlaying = null;
   }
 
   repeat() {
     let step = this.activeIndex % 8;
-    let prevStep = this.prevIndex % 8;
 
     const activeBar = document.querySelectorAll(`.b${step}`);
-    const prevBar = document.querySelectorAll(`.b${prevStep}`);
+    const allBars = document.querySelectorAll(`.pad`);
 
-    activeBar.forEach((bar) => {
-      bar.classList.add("animated-pad");
-      prevBar.forEach((bar) => {
-        bar.classList.remove("animated-pad");
-      });
-      // THINK HOW TO REFACTOR THIS FEATURE: YOU MIGHT USE THE INDEX
-      // OF THE ACTIVE BARS TO GET THE PREVIOUS BAR AND ANIMATE THOSE???
+    allBars.forEach((bar) => {
+      bar.classList.remove("animated-pad");
     });
 
     activeBar.forEach((pad) => {
+      pad.classList.add("animated-pad");
       if (pad.classList.contains("active")) {
         if (pad.classList.contains("kick-pad")) {
           this.kickSound.fastSeek(0);
@@ -58,7 +41,6 @@ class DrumKit {
     });
 
     this.activeIndex++;
-    this.prevIndex++;
   }
 
   start() {
