@@ -114,3 +114,7 @@ svg {
 .animated-pad {
   transform: scale(1.2);
 }
+
+.mute.active {
+  background-color: rgb(112, 111, 111);
+}
