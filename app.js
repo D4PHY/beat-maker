@@ -13,6 +13,39 @@ class DrumKit {
     this.activeIndex = 0;
     this.bpm = 500;
     this.isPlaying = null;
+
+    // EVENT LISTENERS
+    this.pads.forEach((pad) => {
+      pad.addEventListener("click", () => {
+        if (!pad.classList.contains("active")) {
+          pad.classList.add("active");
+        } else {
+          pad.classList.remove("active");
+        }
+      });
+    });
+
+    this.btnPlay.addEventListener("click", () => {
+      if (this.btnPlay.textContent === "Play") {
+        this.start();
+      } else {
+        this.stop();
+      }
+    });
+
+    this.select.forEach((select) => {
+      select.addEventListener("click", (event) => {
+        this.changeSound(event);
+      });
+    });
+
+    this.muteBtn.forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        this.muteTrack(event);
+      });
+    });
+
+    this.addSounds();
   }
 
   repeat() {
@@ -132,35 +165,3 @@ class DrumKit {
 }
 
 const drumKit = new DrumKit();
-
-drumKit.pads.forEach((pad) => {
-  pad.addEventListener("click", () => {
-    if (!pad.classList.contains("active")) {
-      pad.classList.add("active");
-    } else {
-      pad.classList.remove("active");
-    }
-  });
-});
-
-drumKit.btnPlay.addEventListener("click", () => {
-  if (drumKit.btnPlay.textContent === "Play") {
-    drumKit.start();
-  } else {
-    drumKit.stop();
-  }
-});
-
-drumKit.select.forEach((select) => {
-  select.addEventListener("click", (event) => {
-    drumKit.changeSound(event);
-  });
-});
-
-drumKit.muteBtn.forEach((btn) => {
-  btn.addEventListener("click", (event) => {
-    drumKit.muteTrack(event);
-  });
-});
-
-drumKit.addSounds();
