@@ -118,3 +118,8 @@ svg {
 .mute.active {
   background-color: rgb(112, 111, 111);
 }
+
+#tempo-slider {
+  margin: 5rem 0;
+  display: block;
+}

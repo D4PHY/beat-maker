@@ -10,8 +10,9 @@ class DrumKit {
     this.snareSelect = document.getElementById("snare-select");
     this.hihatSelect = document.getElementById("hihat-select");
     this.muteBtn = document.querySelectorAll(".mute");
+    this.tempoSlider = document.querySelector("#tempo-slider");
     this.activeIndex = 0;
-    this.bpm = 500;
+    this.bpm = 120;
     this.isPlaying = null;
 
     // EVENT LISTENERS
@@ -45,8 +46,18 @@ class DrumKit {
       });
     });
 
+    this.tempoSlider.addEventListener("input", (event) => {
+      this.changeTempoText(event);
+    });
+
+    this.tempoSlider.addEventListener("change", (event) => {
+      this.adjustTempo(event);
+    });
+
     this.addSounds();
   }
+
+  // DRUMKIT METHODS
 
   repeat() {
     let step = this.activeIndex % 8;
@@ -87,6 +98,9 @@ class DrumKit {
 
   stop() {
     clearInterval(this.isPlaying);
+    this.pads.forEach((pad) => {
+      pad.classList.remove("animated-pad");
+    });
     this.btnPlay.textContent = "Play";
   }
 
@@ -161,6 +175,20 @@ class DrumKit {
           break;
       }
     }
+  }
+
+  adjustTempo(event) {
+    clearInterval(this.isPlaying);
+    this.isPlaying = null;
+    if (this.btnPlay.textContent === "Stop") {
+      this.start();
+    }
+  }
+
+  changeTempoText(event) {
+    this.bpm = event.target.value;
+    const tempoNr = document.querySelector(".tempo-nr");
+    tempoNr.textContent = event.target.value;
   }
 }
 
