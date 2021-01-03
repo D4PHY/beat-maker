@@ -10,84 +10,41 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>Dj Drumzi - Crate your own drum music</title>
   </head>
   <body>
-    <div class="sequencer">
-      <div class="kick-track">
-        <div class="controls">
-          <h1>Kick</h1>
-          <button class="mute kick-volume" data-track="0">
-            <i class="fas fa-volume-mute"></i>
-          </button>
-          <select name="kick-select" id="kick-select"></select>
-        </div>
-        <div class="kick">
-          <div class="pad kick-pad b0"></div>
-          <div class="pad kick-pad b1"></div>
-          <div class="pad kick-pad b2"></div>
-          <div class="pad kick-pad b3"></div>
-          <div class="pad kick-pad b4"></div>
-          <div class="pad kick-pad b5"></div>
-          <div class="pad kick-pad b6"></div>
-          <div class="pad kick-pad b7"></div>
-        </div>
-      </div>
-      <div class="snare-track">
-        <div class="controls">
-          <h1>Snare</h1>
-          <button class="mute snare-volume" data-track="1">
-            <i class="fas fa-volume-mute"></i>
-          </button>
-          <select name="snare-select" id="snare-select"></select>
-        </div>
-        <div class="snare">
-          <div class="pad snare-pad b0"></div>
-          <div class="pad snare-pad b1"></div>
-          <div class="pad snare-pad b2"></div>
-          <div class="pad snare-pad b3"></div>
-          <div class="pad snare-pad b4"></div>
-          <div class="pad snare-pad b5"></div>
-          <div class="pad snare-pad b6"></div>
-          <div class="pad snare-pad b7"></div>
-        </div>
-      </div>
-      <div class="hihat-track">
-        <div class="controls">
-          <h1>Hihat</h1>
-          <button class="mute hihat-volume" data-track="2">
-            <i class="fas fa-volume-mute"></i>
-          </button>
-          <select name="hihat-select" id="hihat-select"></select>
-        </div>
-        <div class="hihat">
-          <div class="pad hihat-pad b0"></div>
-          <div class="pad hihat-pad b1"></div>
-          <div class="pad hihat-pad b2"></div>
-          <div class="pad hihat-pad b3"></div>
-          <div class="pad hihat-pad b4"></div>
-          <div class="pad hihat-pad b5"></div>
-          <div class="pad hihat-pad b6"></div>
-          <div class="pad hihat-pad b7"></div>
-        </div>
-      </div>
-      <button class="btn-play">Play</button>
-      <div class="tempo">
-        <input
-          type="range"
-          id="tempo-slider"
-          name="tempo-slider"
-          min="40"
-          max="300"
-          value="150"
-        />
-        <p>Tempo: <span class="tempo-nr">150</span></p>
-      </div>
-    </div>
+    <div class="container">
+      <header>
+        <a id="logo" href="./index.html"><img src="./img/logo-4.png" /></a>
 
-    <audio class="kick-sound" src="./sounds-library/kick-dry.wav"></audio>
-    <audio class="snare-sound" src="./sounds-library/snare-808.wav"></audio>
-    <audio class="hihat-sound" src="./sounds-library/hihat-808.wav"></audio>
-    <script src="./app.js"></script>
+        <div class="controls">
+          <div class="tempo">
+            <input
+              type="range"
+              min="20"
+              max="300"
+              value="150"
+              id="tempo-slider"
+            />
+            <label for="tempo-slider">Tempo</label>
+          </div>
+
+          <div class="drum-type-select">
+            <select name="drum-select" id="drum-select">
+              <option value="./sounds-library/clap-808.wav">Clap 808</option>
+              <option value="./sounds-library/clap-analog.wav">
+                Clap Analog
+              </option>
+              <option value="./sounds-library/clap-fat.wav">Clap Fat</option>
+            </select>
+            <label for="drum-select">Clap</label>
+          </div>
+        </div>
+      </header>
+
+      <main>pads here</main>
+
+      <footer>2021 DjDrujBe | Made by D4phy</footer>
+    </div>
   </body>
 </html>
