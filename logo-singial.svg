@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="logo-singial.svg">
+  <defs
+     id="defs2">
+    <style
+       type="text/css"
+       id="style10">
+   <![CDATA[
+    .fil0 {fill:#FEFEFE;fill-rule:nonzero}
+   ]]>
+  </style>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1346"
+     inkscape:window-height="1040"
+     inkscape:window-x="104"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       style="clip-rule:evenodd;fill:#ffffff;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       id="g28"
+       transform="matrix(0.0072706,0,0,0.0072706,-140.57844,26.814046)">
+      <g
+         id="Layer_x0020_1"
+         style="fill:#ffffff">
+  <metadata
+   id="CorelCorpID_0Corel-Layer" />
+
+  <path
+   class="fil0"
+   d="m 23493,17473 c -25,-1747 -2562,-1218 -2562,-1965 0,-227 185,-362 521,-362 403,0 647,210 689,530 h 1327 c -93,-924 -765,-1596 -1974,-1596 -1226,0 -1906,655 -1906,1453 0,1722 2553,1176 2553,1931 0,210 -193,378 -563,378 -395,0 -689,-218 -722,-546 h -1420 c 68,907 907,1605 2159,1605 1176,0 1898,-614 1898,-1428 z m 882,1360 h 1436 v -4686 h -1436 z m 722,-5173 c 504,0 848,-344 848,-773 0,-436 -344,-781 -848,-781 -512,0 -857,345 -857,781 0,429 345,773 857,773 z m 4989,5173 h 1427 v -2737 c 0,-1260 -722,-1999 -1805,-1999 -630,0 -1134,277 -1420,672 v -622 h -1436 v 4686 h 1436 v -2544 c 0,-639 353,-991 899,-991 546,0 899,352 899,991 z m 2141,-2351 c 0,1478 916,2419 2066,2419 689,0 1184,-328 1445,-739 v 663 c 0,789 -429,1075 -975,1075 -495,0 -848,-227 -940,-580 h -1419 c 126,1117 1033,1823 2427,1823 1621,0 2343,-1067 2343,-2318 v -4678 h -1436 v 664 c -252,-420 -756,-731 -1445,-731 -1150,0 -2066,924 -2066,2402 z m 3511,8 c 0,748 -479,1159 -1025,1159 -537,0 -1024,-420 -1024,-1167 0,-748 487,-1151 1024,-1151 546,0 1025,412 1025,1159 z m 2477,2343 h 1436 v -4686 h -1436 z m 2192,-2351 c 0,1478 916,2419 2058,2419 697,0 1192,-320 1453,-731 v 663 h 1436 v -4686 h -1436 v 664 c -252,-412 -748,-731 -1445,-731 -1150,0 -2066,924 -2066,2402 z m 3511,8 c 0,748 -479,1159 -1025,1159 -537,0 -1024,-420 -1024,-1167 0,-748 487,-1151 1024,-1151 546,0 1025,412 1025,1159 z m 2477,2343 h 1436 v -6214 h -1436 z"
+   id="path15"
+   style="fill:#ffffff" />
+
+ </g>
+    </g>
+  </g>
+</svg>

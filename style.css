@@ -4,29 +4,21 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Aqua Grotesque";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Aqua Grotesque"),
-    url("./fonts/aqua-grotesque/aqua.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Mery Jane";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Mery Jane"), url("./fonts/meryjane/meryjane.woff") format("woff");
+html {
+  font-size: 62.5%;
 }
 
 body {
-  background-color: #ff3333;
+  background-color: #ec1515;
   height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 2.6rem;
+  color: #ffeeee;
 }
 
 .container {
-  width: 70%;
-  height: 100%;
+  width: 90vw;
+  height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -37,73 +29,204 @@ body {
 
 header {
   width: 100%;
+  min-height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#logo {
-  display: inline-block;
-  min-width: 7rem;
-  max-width: 7rem;
-}
-
 #logo img {
-  width: 100%;
+  width: 15.6rem;
+  height: 4.9rem;
 }
 
-.controls {
+.message {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.header-controls {
   display: flex;
   min-height: 3rem;
   align-items: center;
-  justify-content: center;
-  justify-items: center;
+  justify-content: space-between;
 }
 
-.tempo {
-  margin-right: 2rem;
+.tempo,
+.drum-select {
   display: flex;
+  margin-left: 2rem;
 }
 
 .tempo input,
-#drum-select {
-  width: 13rem;
+.drum-select select {
+  width: 19rem;
   margin-right: 1rem;
   justify-content: center;
   align-items: center;
 }
 
-#drum-select,
-#drum-select option {
-  font-family: "Aqua Grotesque", sans-serif;
+.drum-select select,
+.drum-select option {
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: 1.7rem;
 }
 
-.tempo label {
-  justify-self: center;
-  display: inline-block;
-  align-self: center;
-}
-
-.tempo label,
-.drum-type-select label {
-  font-family: "Mery Jane", sans-serif;
-  font-size: 2.6rem;
+.tempo span,
+.drum-select span {
+  font-size: 3.2rem;
   color: white;
 }
 
-.tempo input {
+/* RANGE STYLES */
+
+input[type="range"] {
   -webkit-appearance: none;
-  height: 0.6rem;
-  background-color: #2b2a29;
-  position: relative;
-  top: 1.22rem;
+  margin: 10px 0;
+  width: 100%;
+  background-color: transparent;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #ac51b5;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 39px;
+  border-radius: 7px;
+  background: #65001c;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.6px;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #ac51b5;
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #ac51b5;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 39px;
+  border-radius: 7px;
+  background: #65001c;
+  cursor: pointer;
+}
+input[type="range"]::-ms-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 39px 0;
+  color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #ac51b5;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #ac51b5;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type="range"]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 39px;
+  border-radius: 7px;
+  background: #65001c;
+  cursor: pointer;
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #ac51b5;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #ac51b5;
 }
 
-#drum-select {
+/* SELECT STYLES */
+
+/* .drum-select select {
   background-color: #2b2a29;
   color: white;
   border: none;
   padding: 0.3rem;
+} */
+
+/* Drum Maker Styles */
+
+main {
+}
+
+.beatmaker {
+  width: 100%;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.track {
+  display: flex;
+}
+
+.custom-select {
+  list-style: none;
+  width: 4rem;
+}
+
+.custom-select li {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.custom-select li i {
+}
+
+.pads {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pad {
+  min-width: 7.3rem;
+  height: 2.9rem;
+  background-color: #db8080;
+  margin: 0 1rem;
+}
+
+.mute-control i {
+  color: #db8080;
+}
+
+footer {
+  min-height: 7vh;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0c1514;
+  align-self: flex-end;
 }
