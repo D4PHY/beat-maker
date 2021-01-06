@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./style.css" />
-    <title>Dj Drumzi - Crate your own drum music</title>
+    <title>Singial - Digital music making</title>
   </head>
   <body>
     <div class="container">
@@ -23,17 +23,15 @@
         <a id="logo" href="./index.html"><img src="./img/logo.svg" /></a>
 
         <h1 class="message">Digital music making.</h1>
+
+        <!-- <nav>
+          <ul class="navigation">
+            <li>Login</li>
+            <li>Sign up</li>
+          </ul>
+        </nav> -->
         <!-- <div class="header-controls">
-          <div class="tempo">
-            <input
-              type="range"
-              min="20"
-              max="300"
-              value="150"
-              class="tempo-slider"
-            />
-            <span>Tempo</span>
-          </div>
+          
 
           <div class="drum-select">
             <select>
@@ -55,10 +53,10 @@
               <li>Snare<i class="fas fa-angle-down"></i></li>
             </ul>
             <div class="pads">
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
               <div class="pad"></div>
@@ -75,13 +73,13 @@
               <li>Crash<i class="fas fa-angle-down"></i></li>
             </ul>
             <div class="pads">
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
             </div>
             <div class="mute-control">
@@ -97,10 +95,10 @@
             <div class="pads">
               <div class="pad"></div>
               <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
             </div>
@@ -116,11 +114,11 @@
             </ul>
             <div class="pads">
               <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
             </div>
@@ -135,13 +133,13 @@
               <li>Clap<i class="fas fa-angle-down"></i></li>
             </ul>
             <div class="pads">
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
               <div class="pad"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
             </div>
             <div class="mute-control">
@@ -180,7 +178,7 @@
               <div class="pad"></div>
               <div class="pad"></div>
               <div class="pad"></div>
-              <div class="pad"></div>
+              <div class="pad pad-active"></div>
               <div class="pad"></div>
               <div class="pad"></div>
             </div>
@@ -268,6 +266,32 @@
               <i class="fas fa-volume-mute"></i>
             </div>
           </div>
+        </div>
+
+        <div class="media-controls">
+          <div class="tempo">
+            <span class="range-name">Tempo</span>
+            <input
+              type="range"
+              min="20"
+              max="300"
+              value="150"
+              class="tempo-slider"
+            />
+            <span class="bpi-text">150 bpi</span>
+          </div>
+          <div class="play-controls">
+            <i class="pause-btn fas fa-pause"></i>
+            <i class="play-btn fas fa-play"></i>
+            <i class="stop-btn fas fa-stop"></i>
+          </div>
+        </div>
+
+        <div class="song-options">
+          <button class="delete-btn">
+            <i class="fas fa-minus-circle"></i>Delete selection
+          </button>
+          <button class="save-btn">Save</button>
         </div>
       </main>
 
