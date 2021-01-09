@@ -1,0 +1,13 @@
+1. parentNode.append()
+appendChild() vs append() : append() method will insert a javascript Node object
+and also a DomString object after the last child of a parent node.
+
+2. Remove everything after a certain character
+const song = "kick-mama.wav"; // kick-mama.wav
+const songLabel = song.split("-")[0]; // kick
+
+3. Remove duplicate values from JS array
+ES6 provides the Set object, which makes things a whole lot easier:
+const duplicates = ["mama", "tata", "mama", "dafi", "nicu", "tata"]; // mama, tata, mama, dafi, nicu, tata
+duplicates = new Set(duplicates); // mama, tata, dafi, nicu
+

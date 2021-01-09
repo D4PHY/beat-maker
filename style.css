@@ -1,3 +1,5 @@
+/* Genaral Rules */
+
 * {
   margin: 0;
   padding: 0;
@@ -22,63 +24,58 @@ button {
 }
 
 .container {
-  width: 90vw;
+  width: 100vw;
   height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 0;
 }
 
+/* Header */
+
 header {
+  background-color: #0c1514;
   width: 100%;
-  min-height: 10vh;
+  min-height: 7rem;
+  padding: 2rem 5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 #logo img {
-  width: 12.8rem;
-  height: 3.8rem;
+  width: 13.6rem;
   position: relative;
-  left: 1.9rem;
+  left: 0.4rem;
   top: 0.6rem;
-}
-
-.message {
-  font-size: 2.4rem;
-  font-weight: 400;
-}
-
-/* .navigation {
 }
 
 .navigation {
   list-style: none;
-  font-size: 1.8rem;
-  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 400;
   display: flex;
 }
 
 .navigation li {
-  padding-right: 3rem;
+  padding-right: 1.4rem;
 }
 
 .navigation li:last-child:before {
   content: "|";
-  margin-right: 3rem;
+  margin-right: 1.4rem;
 }
 
 .navigation li:hover {
-  color: #0c1514;
+  color: #ff0000;
 }
 
-.navigation li:last-child:before:hover {
-  color: blue;
-} */
+.navigation li:hover .navigation li:last-child::before {
+  color: lime;
+}
 
 /* SELECT STYLES */
 
@@ -89,17 +86,65 @@ header {
   padding: 0.3rem;
 } */
 
-/* Drum Maker Styles */
+/* Main */
 
 main {
-  padding: 2.4rem;
+  width: 90vw;
+  flex: auto;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.beatmaker {
+/* Main. Beatmaker Options */
+
+.beatmaker-tools {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  /* display: flex;
-  flex-direction: column; */
+  min-height: 7rem;
+  padding: 2rem 0;
 }
+
+.message {
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.song-options button {
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0 2rem;
+  transition: all 0.3s ease;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: #ffeeee;
+}
+
+.delete-btn i {
+  color: #941818;
+  padding: 1rem;
+}
+
+.delete-btn:hover,
+.delete-btn:hover i {
+  color: #0c1514;
+}
+
+.save-btn {
+  background-color: #ffeeee;
+  color: #941818;
+  border-radius: 3rem;
+  padding: 1.2rem 3.4rem;
+}
+
+/* Main. Beatmaker */
 
 .track {
   display: flex;
@@ -131,13 +176,25 @@ main {
 }
 
 .pad {
-  min-width: 7.3rem;
-  height: 2.9rem;
+  min-width: 6.3rem;
+  height: 2.4rem;
   background-color: #db8080;
   margin: 0 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .pad:hover {
+  background-color: #ffeeee;
+}
+
+.track:hover .pad,
+.track:hover li,
+.track:hover .mute-btn,
+.track li:hover .track {
+  color: #0c1514;
+}
+
+.track:hover .pad {
   border: 0.4rem solid #0c1514;
 }
 
@@ -153,26 +210,29 @@ main {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
-.mute-control i {
+.mute-btn i {
   padding-left: 2rem;
   cursor: pointer;
 }
 
-.mute-control i {
+.mute-btn i {
   padding: 1rem;
   font-size: 2.1rem;
 }
 
-.mute-control i:hover {
+.mute-btn i:hover {
   color: #0c1514;
 }
+
+/* Main. Media Controls */
 
 .media-controls {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem 0;
+  min-height: 7rem;
+  padding: 1rem 0 0 0;
 }
 
 .tempo {
@@ -225,7 +285,6 @@ input[type="range"]::-moz-range-track {
   width: 18rem;
   height: 1.2rem;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
   background: #ffeeee;
   border-radius: 0.4rem;
@@ -246,7 +305,6 @@ input[type="range"]::-ms-track {
   width: 18rem;
   height: 1.2rem;
   cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   border-width: 39px 0;
@@ -291,9 +349,6 @@ input[type="range"]:focus::-ms-fill-upper {
   text-transform: uppercase;
 }
 
-.play-controls {
-}
-
 .play-controls i {
   cursor: pointer;
   padding: 2rem;
@@ -303,23 +358,9 @@ input[type="range"]:focus::-ms-fill-upper {
   color: #0c1514;
 }
 
-.song-options {
-  display: flex;
-  justify-content: center;
-}
-
-.song-options button {
-  border: none;
-  font-size: 2rem;
-  font-weight: 700;
-  padding: 0 2rem;
-  transition: all 0.3s ease in ease-in-out;
-}
-
-.pause-btn {
-}
-
-.play-btn {
+.save-btn:hover {
+  background-color: #0c1514;
+  color: #ffeeee;
 }
 
 .stop-btn {
@@ -327,37 +368,15 @@ input[type="range"]:focus::-ms-fill-upper {
   padding: 0 2.1rem;
 }
 
-.delete-btn {
-  background-color: transparent;
-  color: #ffeeee;
-}
-
-.delete-btn i {
-  color: #941818;
-  padding: 1rem;
-}
-
-.delete-btn:hover,
-.delete-btn:hover i {
-  color: #0c1514;
-}
-
-.save-btn {
-  background-color: #ffeeee;
-  color: #941818;
-  border-radius: 3rem;
-  padding: 1.2rem 3.4rem;
-}
-
-.save-btn:hover {
-  background-color: #0c1514;
-  color: #ffeeee;
-}
+/* Footer Optins */
 
 footer {
-  min-height: 7vh;
+  width: 90vw;
+  margin: auto;
+  min-height: 9vh;
+  padding: 4rem 0;
   font-size: 1.4rem;
   font-weight: 700;
   color: #0c1514;
-  align-self: flex-end;
+  text-align: right;
 }
