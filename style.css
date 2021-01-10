@@ -16,6 +16,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 2.6rem;
   color: #ffeeee;
+  counter-reset: pad-counter;
 }
 
 button {
@@ -148,11 +149,13 @@ main {
 
 .track {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .custom-select {
   list-style: none;
-  min-width: 16rem;
+  width: 14rem;
   padding-right: 2rem;
 }
 
@@ -176,15 +179,45 @@ main {
 }
 
 .pad {
-  min-width: 6.3rem;
-  height: 2.4rem;
+  min-width: 5.4rem;
+  height: 3.4rem;
   background-color: #db8080;
   margin: 0 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 0.2rem;
+
+  --notchSize: 0.7rem;
+
+  clip-path: polygon(
+    0% var(--notchSize),
+    var(--notchSize) 0%,
+    calc(100% - var(--notchSize)) 0%,
+    100% var(--notchSize),
+    100% calc(100% - var(--notchSize)),
+    calc(100% - var(--notchSize)) 100%,
+    var(--notchSize) 100%,
+    0% calc(100% - var(--notchSize))
+  );
+}
+
+.track:last-child .pad:before {
+  counter-increment: pad-counter;
+  content: counter(pad-counter) "";
+  position: absolute;
+  top: 5.6rem;
+  left: 1.8rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #db8080;
 }
 
 .pad:hover {
   background-color: #ffeeee;
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Firefox 3.5 - 3.6 */
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
 .track:hover .pad,
@@ -195,23 +228,37 @@ main {
 }
 
 .track:hover .pad {
-  border: 0.4rem solid #0c1514;
+  background-color: #ff9797;
 }
 
-.pad:focus,
-.pad:active {
+.track:hover .pad.pad-active {
   background-color: #ffeeee;
 }
 
-.pad-active {
-  background-color: #ff0000;
+.pad-active,
+.pad:focus,
+.pad:active,
+.pad:hover.pad-active {
+  background-color: #ffeeee;
   -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Firefox 3.5 - 3.6 */
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
+.pad:hover.pad.pad-active {
+  background-color: #ffbebe;
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Firefox 3.5 - 3.6 */
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3); /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.pad-animated {
+  background-color: #ff9797;
+}
+}
+
 .mute-btn i {
-  padding-left: 2rem;
+  margin-left: 0.8rem;
   cursor: pointer;
 }
 
@@ -228,11 +275,10 @@ main {
 
 .media-controls {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 7rem;
-  padding: 1rem 0 0 0;
+  padding: 3.4rem 0 0 0;
 }
 
 .tempo {

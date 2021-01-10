@@ -57,8 +57,16 @@ class Track {
     const padNum = 16;
     for (let i = 0; i < padNum; i++) {
       const pad = new Pad();
+      pad.tag.addEventListener("click", () => {
+        this.activatePad(pad.tag);
+        console.log(pad.tag);
+      });
       this.pads.appendChild(pad.tag);
     }
+  }
+
+  activatePad(pad) {
+    pad.classList.toggle("pad-active");
   }
 }
 
@@ -82,18 +90,9 @@ class BeatMaker {
       const track = new Track(trackName);
       this.container.appendChild(track.tag);
     });
-    // importLib().then((tracks) => {
-    //   tracks.forEach((track) => {
-    //     console.log(track);
-    //     const trackObj = new Track(track.name);
-    //     // console.log(trackObj);
-    //     trackObj.name = track.name;
-    //     this.container.appendChild(trackObj.tag);
-    //   });
-    // });
   }
 
-  selectPads() {}
+  repeater() {}
 }
 
 const beatMaker = new BeatMaker();
