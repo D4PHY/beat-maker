@@ -1,5 +1,8 @@
+document.addEventListener("DOMContentLoaded", importLib);
 const lib = [];
+const padNum = 16;
 
+// DATA FECTH FROM LOCAL URL: './sounds-lib.json'
 async function importLib() {
   const dataFetch = await fetch("./sounds-lib.json");
   const data = await dataFetch.json();
@@ -14,10 +17,7 @@ async function importLib() {
   return lib;
 }
 
-importLib();
-
-console.log(lib);
-
+// PAD - SMALLEST BEATMAKER UNIT
 class Pad {
   constructor() {
     this.tag = document.createElement("div");
@@ -31,6 +31,7 @@ class Pad {
   }
 }
 
+// TRACK - A GROUP OF PADS WITH THE SAME SOUND
 class Track {
   constructor(name) {
     this.name = name;
@@ -54,13 +55,12 @@ class Track {
   }
 
   padInit() {
-    const padNum = 16;
     for (let i = 0; i < padNum; i++) {
       const pad = new Pad();
       pad.tag.addEventListener("click", () => {
         this.activatePad(pad.tag);
-        console.log(pad.tag);
       });
+      pad.tag.classList.add(`p${i}`);
       this.pads.appendChild(pad.tag);
     }
   }
@@ -70,19 +70,116 @@ class Track {
   }
 }
 
+// BEATMAKER - A GROUP OF DIFFERENT TRACKS
 class BeatMaker {
   constructor() {
     this.container = document.querySelector(".beatmaker");
     this.trackList = [];
+
+    // PLAYER VARIABLES
+    this.bpi = 300;
+    this.index = 0;
+    this.step = null;
+    this.currentStep = null;
+    this.repeat = null;
+    this.isPlaying = null;
+    this.isPaused = null;
+
+    // CONSUME PROMISES
     importLib().then((data) => {
       data.forEach((track) => {
         this.trackList.push(track.label);
       });
       this.trackList = new Set(this.trackList);
       this.beatMakerInit();
+
+      // BEATMAKER INTRO ANIMATION
+      gsap.to(".track", {
+        duration: 0.08,
+        opacity: 1,
+        delay: 1.5,
+        stagger: 0.04,
+      });
+
+      // SELECT BEATMAKER COMPONENTS (DATA AVAILABLE AFTER FETCHING IS DONE)
+      const allPads = document.querySelectorAll(".pad");
+
+      // BEATMAKER FUNCTS.
+      const repeater = (actualStep) => {
+        this.step = actualStep % padNum;
+        this.repeat = setInterval(() => {
+          activeBar(this.step);
+          if (!this.isPaused) {
+            console.log(this.step);
+            this.step++;
+            if (this.step === padNum) {
+              this.step = 0;
+            }
+          } else {
+            activeBar(this.currentStep);
+            console.log(this.currentStep);
+            this.currentStep++;
+            if (this.currentStep === padNum) {
+              this.curentStep = 0;
+            }
+          }
+        }, this.bpi);
+      };
+
+      const play = () => {
+        if (!this.isPaused) {
+          repeater(this.index);
+        } else if (this.isPaused) {
+          repeater(this.currentStep);
+          this.isPaused = null;
+        }
+      };
+
+      const stop = () => {
+        clearInterval(this.repeat);
+        console.log("stop");
+      };
+
+      const pause = () => {
+        this.isPaused = true;
+        clearInterval(this.repeat);
+        // RECORD CURRENT STEP TO BE PASSED TO THE PLAY() [WE DON'T WANT TO START FROM BEGINING]
+        this.currentStep = this.step;
+        console.log("pause", this.isPaused);
+      };
+
+      const activeBar = (step) => {
+        allPads.forEach((pad) => {
+          if (pad.classList.contains(`p${step}`)) {
+            pad.classList.add("bar");
+          } else {
+            pad.classList.remove("bar");
+          }
+        });
+      };
+
+      // BEATMAKER EVENT HANDLERS
+      this.playBtn.addEventListener("click", () => {
+        play();
+      });
+
+      this.stopBtn.addEventListener("click", () => {
+        stop();
+      });
+
+      this.pauseBtn.addEventListener("click", () => {
+        pause();
+      });
     });
 
-    // BEATMAKER EVENT HANDLERS
+    // SELECT INTERACTIVE UI
+    this.deleteBtn = document.querySelector(".delete-btn");
+    this.saveBtn = document.querySelector(".save-btn");
+    this.tempoSlider = document.querySelector(".tempo-slider");
+    this.bpiText = document.querySelector(".bpi-text");
+    this.pauseBtn = document.querySelector(".pause-btn");
+    this.playBtn = document.querySelector(".play-btn");
+    this.stopBtn = document.querySelector(".stop-btn");
   }
 
   beatMakerInit() {
@@ -91,12 +188,18 @@ class BeatMaker {
       this.container.appendChild(track.tag);
     });
   }
-
-  repeater() {}
 }
 
+// CREATE AND INITIALIZE THE  BEATMAKER
 const beatMaker = new BeatMaker();
 beatMaker.beatMakerInit();
+
+// ANIMATE PAGE UI
+const timeline = gsap.timeline({ defaults: { duration: 1 } });
+timeline
+  .from("header", { y: "-100%", ease: "bounce" })
+  .fromTo(".beatmaker-tools, .media-controls", { opacity: 0 }, { opacity: 1 })
+  .from("footer", { y: "100", ease: "elastic" });
 
 // class DrumKit {
 //   constructor() {
