@@ -38,10 +38,29 @@ class Track {
     this.tag = document.createElement("div");
     this.tag.classList.add("track", this.name);
 
-    this.select = document.createElement("ul");
-    this.select.classList.add("custom-select");
-    this.select.innerHTML = `<li>${this.name}<i class="fas fa-angle-down"></i><li>`;
-    this.tag.appendChild(this.select);
+    // CREATE CUSTOM SELECT
+    this.customSelectWrapper = document.createElement("div");
+    this.customSelectWrapper.classList.add("custom-select-wrapper");
+    this.customSelectWrapper.innerHTML = `<div class="custom-select-input">
+    <div class="actual-select-input">
+      <label for="custom-select">Clap</label>
+      <input type="text" id="custom-select" />
+    </div>
+    <i class="custom-select-arrow fas fa-chevron-down"></i>
+  </div>
+
+  <ul class="custom-select-optios">
+    <li>Clap 1<i class="custom-select-arrow fas fa-angle-down"></i></li>
+    <li>Clap 2<i class="custom-select-arrow fas fa-angle-down"></i></li>
+    <li>Clap 3<i class="custom-select-arrow fas fa-angle-down"></i></li>
+    <li>Clap 4<i class="custom-select-arrow fas fa-angle-down"></i></li>
+    <li>Clap 5<i class="custom-select-arrow fas fa-angle-down"></i></li>
+  </ul>`;
+    this.tag.appendChild(this.customSelectWrapper);
+    // this.select = document.createElement("ul");
+    // this.select.classList.add("custom-select");
+    // this.select.innerHTML = `<li>${this.name}<i class="fas fa-angle-down"></i><li>`;
+    // this.tag.appendChild(this.select);
 
     this.pads = document.createElement("div");
     this.pads.classList.add("pads");
@@ -85,7 +104,7 @@ class BeatMaker {
     this.isPlaying = null;
     this.isPaused = null;
 
-    // CONSUME PROMISES
+    // CONSUME THE PROMISE
     importLib().then((data) => {
       data.forEach((track) => {
         this.trackList.push(track.label);
@@ -103,12 +122,14 @@ class BeatMaker {
 
       // SELECT BEATMAKER COMPONENTS (DATA AVAILABLE AFTER FETCHING IS DONE)
       const allPads = document.querySelectorAll(".pad");
+      const audios = document.querySelectorAll("audio");
 
       // BEATMAKER FUNCTS.
       const repeater = (actualStep) => {
         this.step = actualStep % padNum;
         this.repeat = setInterval(() => {
           activeBar(this.step);
+          playSound();
           if (!this.isPaused) {
             console.log(this.step);
             this.step++;
@@ -158,6 +179,22 @@ class BeatMaker {
         });
       };
 
+      const addSound = () => {
+        audios.forEach((audio) => {
+          audio.src = "./sounds-library/clap-808.wav";
+          audio.type = "audio/wav";
+        });
+      };
+
+      const playSound = () => {
+        audios.forEach((audio) => {
+          if (audio.closest(".pad-active") && audio.closest(".bar")) {
+            audio.play();
+            console.log("hello", audio);
+          }
+        });
+      };
+
       // BEATMAKER EVENT HANDLERS
       this.playBtn.addEventListener("click", () => {
         play();
@@ -170,6 +207,8 @@ class BeatMaker {
       this.pauseBtn.addEventListener("click", () => {
         pause();
       });
+
+      document.addEventListener("DOMContentLoaded", addSound());
     });
 
     // SELECT INTERACTIVE UI

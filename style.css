@@ -54,6 +54,81 @@ header {
   top: 0.6rem;
 }
 
+.custom-select-wrapper {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start; */
+  min-width: 32rem;
+  border: 0.5rem solid blue;
+  height: 4rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.custom-select-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: pink;
+}
+
+.actual-select-input {
+  background-color: lime;
+  width: 100%;
+  position: relative;
+}
+
+.actual-select-input label {
+  position: absolute;
+  text-align: right;
+  right: 1.4rem;
+}
+
+#custom-select {
+  width: 100%;
+  padding: 0.8rem 0;
+  top: -0.3rem;
+  text-align: right;
+  caret-color: transparent;
+}
+
+#custom-select:hover {
+  cursor: default;
+}
+
+.custom-select-arrow {
+  background: red;
+  font-size: 1.8rem;
+  color: #ffeeee;
+  cursor: pointer;
+  padding: 0.8rem;
+}
+
+.custom-select-optios {
+  list-style: none;
+  text-align: right;
+  background-color: #ffeeee;
+  padding: 1.4rem 0;
+  color: #941818;
+  border-radius: 1.9rem;
+  margin-top: 0.4rem;
+  font-size: 1.8rem;
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
+}
+
+.custom-select-optios .custom-select-arrow {
+  visibility: hidden;
+}
+
+.custom-select-optios li {
+  padding: 0.1rem 1.4rem 0.1rem 2rem;
+}
+
+.custom-select-optios li:hover {
+  color: #0c1514;
+}
+
 .navigation {
   list-style: none;
   text-transform: uppercase;
@@ -93,6 +168,9 @@ main {
 }
 
 /* Main. Beatmaker Tools */
+.beatmaker {
+  margin-left: -16rem;
+}
 
 .beatmaker-tools {
   display: flex;
