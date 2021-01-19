@@ -14,13 +14,32 @@
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
+    />
     <link rel="stylesheet" href="./style.css" />
     <title>Singial - Digital music making</title>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
       defer
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
     <script src="./app.js" defer></script>
+    <script src="./pad.js" defer></script>
+    <script src="./select.js" defer></script>
+    <script src="./track.js" defer></script>
+    <script src="./beatmaker.js" defer></script>
+    <noscript>
+      <style>
+        /**
+        * Reinstate scrolling for non-JS clients
+        */
+        .simplebar-content-wrapper {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <div class="container">
@@ -91,7 +110,7 @@
               value="150"
               class="tempo-slider"
             />
-            <span class="bpi-text">150 bpi</span>
+            <span class="bpm-text">150 bpi</span>
           </div>
           <div class="play-controls">
             <i class="pause-btn fas fa-pause"></i>
