@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background-color: #ec1515;
+  background-color: #130707;
   height: 100vh;
   font-family: "Poppins", sans-serif;
   font-size: 2.6rem;
@@ -38,7 +38,7 @@ button {
 /* Header */
 
 header {
-  background-color: #0c1514;
+  background-color: #ec1515;
   width: 100%;
   min-height: 7rem;
   padding: 2rem 5vw;
@@ -52,114 +52,6 @@ header {
   position: relative;
   left: 0.4rem;
   top: 0.6rem;
-}
-
-.custom-select-wrapper {
-  min-width: 22rem;
-  max-width: 32rem;
-  height: 4rem;
-  font-size: 2rem;
-  font-weight: 700;
-  text-transform: lowercase;
-  margin-right: 1.2rem;
-}
-
-.custom-select-wrapper * {
-  pointer-events: none;
-}
-
-.custom-select-input {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.actual-select-input {
-  width: 100%;
-  position: relative;
-}
-
-.actual-select-input label {
-  position: absolute;
-  text-align: right;
-  right: 1.2rem;
-  cursor: pointer;
-}
-
-.custom-select {
-  width: 100%;
-  padding: 0.8rem 0;
-  top: -0.3rem;
-  text-align: right;
-  background-color: transparent;
-  border: none;
-  caret-color: transparent;
-}
-
-.custom-select:hover {
-  cursor: default;
-}
-
-.custom-select-arrow {
-  font-size: 1.8rem;
-  color: #ffeeee;
-  cursor: pointer;
-  padding: 0.8rem;
-}
-
-.custom-select-options {
-  list-style: none;
-  text-align: right;
-  background-color: #ffeeee;
-  padding: 1.2rem 0;
-  color: #941818;
-  margin-top: 0.4rem;
-  font-size: 1.8rem;
-  box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
-  max-height: 20rem;
-  overflow: scroll;
-  position: relative;
-  z-index: 100;
-  display: none;
-  /* Create notched corners */
-  --notchSize: 0.7rem;
-  clip-path: polygon(
-    0% var(--notchSize),
-    var(--notchSize) 0%,
-    calc(100% - var(--notchSize)) 0%,
-    100% var(--notchSize),
-    100% calc(100% - var(--notchSize)),
-    calc(100% - var(--notchSize)) 100%,
-    var(--notchSize) 100%,
-    0% calc(100% - var(--notchSize))
-  );
-}
-
-/* Override Simplebar */
-.simplebar-scrollbar {
-}
-
-.simplebar-scrollbar::before {
-  background-color: red;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
-.toggle-select {
-  display: block;
-}
-
-.custom-select-options .custom-select-arrow {
-  visibility: hidden;
-}
-
-.custom-select-options li:hover {
-  color: #0c1514;
-}
-
-.custom-select-wrapper .custom-select-options {
-  pointer-events: initial;
 }
 
 .navigation {
@@ -180,7 +72,7 @@ header {
 }
 
 .navigation li:hover {
-  color: #ff0000;
+  color: #ec1515;
 }
 
 .navigation li:hover .navigation li:last-child::before {
@@ -191,7 +83,7 @@ header {
 
 main {
   width: 90vw;
-  flex: auto;
+
   margin: auto;
   padding: 0 1rem;
   display: flex;
@@ -202,7 +94,7 @@ main {
 
 /* Main. Beatmaker Tools */
 .beatmaker {
-  margin-left: -16rem;
+  /* margin-left: -16rem; */
 }
 
 .beatmaker-tools {
@@ -238,14 +130,19 @@ main {
 
 .delete-btn:hover,
 .delete-btn:hover i {
-  color: #0c1514;
+  color: #ec1515;
 }
 
 .save-btn {
   background-color: #ffeeee;
   color: #941818;
-  border-radius: 3rem;
-  padding: 1.2rem 3.4rem;
+  padding: 2.5rem 4.5rem;
+  font-size: rem;
+}
+
+.save-btn:hover {
+  background-color: #ec1515;
+  color: #ffeeee;
 }
 
 /* Main. Beatmaker */
@@ -257,41 +154,59 @@ main {
   opacity: 0;
 }
 
-.custom-select {
-  list-style: none;
-  width: 14rem;
-  padding-right: 2rem;
-}
-
-.custom-select li {
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: right;
-  cursor: pointer;
-}
-
-.custom-select li i {
+select {
+  min-width: 24rem;
+  max-width: 24rem;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  margin-right: 2rem;
+  font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
-  padding-left: 2rem;
+  border: 0.1rem transparent;
+  background-color: #941818 !important;
+  color: #ffeeee;
+  height: 3.4rem;
+  font-weight: 700;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("./img/select-icon.svg") 19.6rem / 2.4rem no-repeat;
+}
+
+select option {
+  background-color: #941818;
+  color: #ffeeee;
+}
+
+/* CAUTION: Internet Explorer hackery ahead */
+select::-ms-expand {
+  display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+}
+
+/* Target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width: 0\0) {
+  select {
+    background: none\9;
+    padding: 5px\9;
+  }
 }
 
 .pads {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
 }
 
 .pad {
-  min-width: 5.4rem;
+  min-width: 3.4rem;
   height: 3.4rem;
   background-color: #db8080;
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
   transition: all 0.5s ease;
   position: relative;
   box-sizing: border-box;
-  border-radius: 0.2rem;
-  /* Create notched corners */
+  /* border-radius: 0.2rem; */
+  /* Create notched corners
   --notchSize: 0.7rem;
   clip-path: polygon(
     0% var(--notchSize),
@@ -302,7 +217,7 @@ main {
     calc(100% - var(--notchSize)) 100%,
     var(--notchSize) 100%,
     0% calc(100% - var(--notchSize))
-  );
+  ); */
 }
 
 .pad:hover {
@@ -345,18 +260,13 @@ main {
   transform: scale(1.05);
 }
 
-.mute-btn i {
-  margin-left: 0.8rem;
-  cursor: pointer;
-}
-
-.mute-btn i {
-  padding: 1rem;
-  font-size: 2.1rem;
-}
-
-.mute-btn i:hover {
-  color: #0c1514;
+.volume-off-btn {
+  background: url("./img/volume-off-icon.svg");
+  width: 3.6rem;
+  height: 3.6rem;
+  border: transparent;
+  vertical-align: middle;
+  margin-left: 2rem;
 }
 
 /* Main. Media Controls */
@@ -511,6 +421,6 @@ footer {
   padding: 4rem 0;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #0c1514;
+  color: #ec1515;
   text-align: right;
 }

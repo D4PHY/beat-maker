@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
 document.addEventListener("DOMContentLoaded", importLib);
 const lib = [];
-const padNum = 16;
+const padNum = 32;
 
 // DATA FECTH FROM LOCAL URL: './sounds-lib.json'
 async function importLib() {

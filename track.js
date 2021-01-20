@@ -7,7 +7,7 @@ class Track {
 
     // GENERATE SELECT
     this.select = new Select(this.name);
-    this.tag.appendChild(this.select.customSelectWrapper);
+    this.tag.appendChild(this.select.tag);
 
     // GENERATE PADS
     this.pads = document.createElement("div");
@@ -16,10 +16,10 @@ class Track {
     this.tag.appendChild(this.pads);
 
     // GENERATE MUTE BTN
-    this.muteBtn = document.createElement("div");
-    this.muteBtn.classList.add("mute-btn", `${this.name}-mute-btn`);
-    this.muteBtn.innerHTML = `<i class="fas fa-volume-mute"></i>`;
-    this.tag.appendChild(this.muteBtn);
+    this.muteBtnContainer = document.createElement("div");
+    this.muteBtnContainer.classList.add("mute-btn", `${this.name}-mute-btn`);
+    this.muteBtnContainer.innerHTML = `<button class="volume-off-btn"></button>`;
+    this.tag.appendChild(this.muteBtnContainer);
   }
 
   padInit() {
