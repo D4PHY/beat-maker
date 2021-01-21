@@ -40,7 +40,7 @@ button {
 header {
   background-color: #ec1515;
   width: 100%;
-  min-height: 7rem;
+  height: 10vh;
   padding: 2rem 5vw;
   display: flex;
   justify-content: space-between;
@@ -83,7 +83,7 @@ header {
 
 main {
   width: 90vw;
-
+  height: 90vh;
   margin: auto;
   padding: 0 1rem;
   display: flex;
@@ -93,9 +93,6 @@ main {
 }
 
 /* Main. Beatmaker Tools */
-.beatmaker {
-  /* margin-left: -16rem; */
-}
 
 .beatmaker-tools {
   display: flex;
@@ -123,21 +120,25 @@ main {
   color: #ffeeee;
 }
 
-.delete-btn i {
-  color: #941818;
-  padding: 1rem;
+.delete-btn .delete-icon {
+  width: 5.2rem;
+  height: 5.2rem;
+  display: inline-block;
+  background: url("./img/undo-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  vertical-align: middle;
+  margin-right: 0.4rem;
 }
 
-.delete-btn:hover,
-.delete-btn:hover i {
+.delete-btn:hover {
   color: #ec1515;
 }
 
-.save-btn {
+button.save-btn {
   background-color: #ffeeee;
   color: #941818;
-  padding: 2.5rem 4.5rem;
-  font-size: rem;
+  padding: 1.5rem 4.5rem;
 }
 
 .save-btn:hover {
@@ -246,8 +247,42 @@ select::-ms-expand {
   background-color: #ffeeee;
 }
 
+/* .kick .pad-active {
+  background-color: #9665ff;
+}
+.snare .pad-active {
+  background-color: #d6ff65;
+}
+.hihat .pad-active {
+  background-color: #ed65ff;
+}
+.openhat .pad-active {
+  background-color: #7bff65;
+}
+.ride .pad-active {
+  background-color: red;
+}
+.perc .pad-active {
+  background-color: #2885fe;
+}
+.cowbell .pad-active {
+  background-color: #fecf28;
+}
+.shaker .pad-active {
+  background-color: #ff65cb;
+}
+.clap .pad-active {
+  background-color: #65c1ff;
+}
+.crash .pad-active {
+  background-color: #65ffed;
+}
+.tom .pad-active {
+  background-color: #65ffa5;
+} */
+
 .pad-active.bar {
-  background-color: #0c1514;
+  background-color: #ec1515;
 }
 
 .pad:hover.pad,
@@ -305,17 +340,15 @@ input[type="range"]::-webkit-slider-runnable-track {
   cursor: pointer;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
   background: #ffeeee;
-  border-radius: 0.4rem;
-  border: 0px solid #000101;
+  border: 0px solid #ec1515;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  border: 0px solid #0c1514;
+  border: 0px solid #ec1515;
   height: 2rem;
   width: 4rem;
-  border-radius: 0.4rem;
-  background: #0c1514;
+  background: #ec1515;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -3.6px;
@@ -329,19 +362,19 @@ input[type="range"]::-moz-range-track {
   width: 18rem;
   height: 1.2rem;
   cursor: pointer;
+  border-radius: 0;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
   background: #ffeeee;
-  border-radius: 0.4rem;
-  border: 0px solid #0c1514;
+  border: 0px solid #ec1515;
 }
 
 input[type="range"]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  border: 0px solid #0c1514;
+  border-radius: 0;
+  border: 0px solid #ec1515;
   height: 2rem;
   width: 4rem;
-  border-radius: 0.4rem;
-  background: #0c1514;
+  background: #ec1515;
   cursor: pointer;
 }
 
@@ -357,25 +390,22 @@ input[type="range"]::-ms-track {
 
 input[type="range"]::-ms-fill-lower {
   background: #ffeeee;
-  border: 0px solid #0c1514;
-  border-radius: 0.4rem;
+  border: 0px solid #ec1515;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
 }
 
 input[type="range"]::-ms-fill-upper {
   background: #ffeeee;
   border: 0px solid #0c1514;
-  border-radius: 0.4rem;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
 }
 
 input[type="range"]::-ms-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  border: 0px solid #0c1514;
+  border: 0px solid #ec1515;
   height: 2rem;
   width: 4rem;
-  border-radius: 0.4rem;
-  background: #0c1514;
+  background: #ec1515;
   cursor: pointer;
 }
 
@@ -393,23 +423,26 @@ input[type="range"]:focus::-ms-fill-upper {
   text-transform: uppercase;
 }
 
-.play-controls i {
+.play-controls button {
   cursor: pointer;
   padding: 2rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: none;
+  vertical-align: middle;
 }
 
-.play-controls i:hover {
-  color: #0c1514;
+.play-controls .pause-btn {
+  background: url("./img/pause-icon.svg");
+  margin-left: 2rem;
 }
 
-.save-btn:hover {
-  background-color: #0c1514;
-  color: #ffeeee;
+.play-btn {
+  background: url("./img/play-icon.svg");
 }
 
 .stop-btn {
-  font-size: 2.3rem;
-  padding: 0 2.1rem;
+  background: url("./img/stop-icon.svg");
 }
 
 /* Footer Optins */
