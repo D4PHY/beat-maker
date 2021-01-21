@@ -32,7 +32,7 @@ class BeatMaker {
       // SELECT BEATMAKER COMPONENTS (DATA AVAILABLE AFTER FETCHING IS DONE)
       const allPads = document.querySelectorAll(".pad");
       const audios = document.querySelectorAll("audio");
-      const selects = document.querySelectorAll(".custom-select-wrapper");
+      const selects = document.querySelectorAll("select");
 
       // BEATMAKER FUNCTS.
       const repeater = (actualStep) => {
@@ -95,9 +95,12 @@ class BeatMaker {
         console.log(options, "hello");
       };
 
-      const addSound = () => {
+      const addSounds = () => {
         audios.forEach((audio) => {
-          audio.src = "./sounds-library/clap-808.wav";
+          const track = audio.closest(".track");
+          const select = track.getElementsByTagName("SELECT");
+          const opt = select[0].options[select[0].options.selectedIndex];
+          audio.src = `./sounds-library/${opt.value}`;
           audio.type = "audio/wav";
         });
       };
@@ -130,7 +133,7 @@ class BeatMaker {
         });
       });
 
-      document.addEventListener("DOMContentLoaded", addSound());
+      document.addEventListener("DOMContentLoaded", addSounds());
     });
 
     // SELECT INTERACTIVE UI
