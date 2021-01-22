@@ -7,11 +7,12 @@ class BeatMaker {
     // PLAYER VARIABLES
     this.bpm = 300;
     this.index = 0;
-    this.step = null;
-    this.currentStep = null;
-    this.repeat = null;
-    this.isPlaying = null;
-    this.isPaused = null;
+    this.step,
+      this.currentStep,
+      this.repeat,
+      this.isPlaying,
+      this.isPaused,
+      (this.currentSound = null);
 
     // CONSUME THE PROMISE
     importLib().then((data) => {
@@ -51,7 +52,7 @@ class BeatMaker {
             console.log(this.currentStep);
             this.currentStep++;
             if (this.currentStep === padNum) {
-              this.curentStep = 0;
+              this.currentStep = 0;
             }
           }
         }, this.bpm);
@@ -89,20 +90,25 @@ class BeatMaker {
         });
       };
 
-      const toggleSelect = (e) => {
-        const options = e.target.lastElementChild;
-        options.classList.toggle("toggle-select");
-        console.log(options, "hello");
-      };
-
       const addSounds = () => {
         audios.forEach((audio) => {
           const track = audio.closest(".track");
           const select = track.getElementsByTagName("SELECT");
-          const opt = select[0].options[select[0].options.selectedIndex];
-          audio.src = `./sounds-library/${opt.value}`;
+          this.currentSound =
+            select[0].options[select[0].options.selectedIndex];
+          audio.src = `./sounds-library/${this.currentSound.value}`;
           audio.type = "audio/wav";
         });
+      };
+
+      const changeSound = (e) => {
+        const selection = e.target.value;
+        this.currentSound = `./sounds-library/${selection}`;
+        const pads = e.target.nextElementSibling.children;
+        // pads.forEach((pad) => {
+        //   console.log(pad.audio);
+        // });
+        console.log(pads);
       };
 
       const playSound = () => {
@@ -128,8 +134,8 @@ class BeatMaker {
       });
 
       selects.forEach((select) => {
-        select.addEventListener("click", (e) => {
-          toggleSelect(e);
+        select.addEventListener("change", (e) => {
+          changeSound(e);
         });
       });
 
