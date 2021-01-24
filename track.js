@@ -2,6 +2,7 @@
 class Track {
   constructor(name) {
     this.name = name;
+    this.pads = [];
     this.tag = document.createElement("div");
     this.tag.classList.add("track", this.name);
 
@@ -10,10 +11,10 @@ class Track {
     this.tag.appendChild(this.select.tag);
 
     // GENERATE PADS
-    this.pads = document.createElement("div");
-    this.pads.classList.add("pads");
+    this.container = document.createElement("div");
+    this.container.classList.add("pads");
     this.padInit();
-    this.tag.appendChild(this.pads);
+    this.tag.appendChild(this.container);
 
     // GENERATE MUTE BTN
     this.muteBtnContainer = document.createElement("div");
@@ -25,11 +26,9 @@ class Track {
   padInit() {
     for (let i = 0; i < padNum; i++) {
       const pad = new Pad();
-      pad.tag.addEventListener("click", () => {
-        this.activatePad(pad.tag);
-      });
-      pad.tag.classList.add(`p${i}`);
-      this.pads.appendChild(pad.tag);
+      pad.parentTrack = this;
+      pad.render();
+      this.pads.push(pad);
     }
   }
 

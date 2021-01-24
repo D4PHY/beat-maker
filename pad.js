@@ -1,13 +1,33 @@
 // PAD - SMALLEST BEATMAKER UNIT
 class Pad {
-  constructor(selectedSound) {
-    this.selectedSound = selectedSound;
-    this.tag = document.createElement("div");
-    this.tag.classList.add("pad");
-    this.sound = document.createElement("audio");
-    // this.sound.classList.add(`clap-sound`);
-    // this.sound.src = selectedSound;
-    // MOVE THE ABOVES IN THE TRACKS
-    this.tag.appendChild(this.sound);
+  constructor() {
+    this.selectedSound = null;
+    this.container = null;
+    this.parentTrack = null;
+    this.audioPlayer = null;
+    this.activated = false;
+  }
+
+  toggleActivated() {
+    if (this.activated) {
+      this.container.classList.remove("active-pad");
+    } else {
+      this.container.classList.add("active-pad");
+    }
+  }
+
+  updateSound(soundName) {
+    this.audioPlayer.src = soundName;
+  }
+
+  render() {
+    this.container = document.createElement("div");
+    this.container.classList.add("pad");
+    this.audioPlayer = document.createElement("audio");
+    this.container.appendChild(this.audioPlayer);
+    this.container.addEventListener("click", () => {
+      this.toggleActivated();
+    });
+    this.parentTrack.container.appendChild(this.container);
   }
 }

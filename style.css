@@ -236,57 +236,57 @@ select::-ms-expand {
   background-color: #ff9797;
 }
 
-.track:hover .pad.pad-active {
+.track:hover .pad.active-pad {
   background-color: #ffeeee;
 }
 
-.pad-active,
+.active-pad,
 .pad:focus,
 .pad:active,
-.pad:hover.pad-active {
+.pad:hover.active-pad {
   background-color: #ffeeee;
 }
 
-/* .kick .pad-active {
+/* .kick .active-pad {
   background-color: #9665ff;
 }
-.snare .pad-active {
+.snare .active-pad {
   background-color: #d6ff65;
 }
-.hihat .pad-active {
+.hihat .active-pad {
   background-color: #ed65ff;
 }
-.openhat .pad-active {
+.openhat .active-pad {
   background-color: #7bff65;
 }
-.ride .pad-active {
+.ride .active-pad {
   background-color: red;
 }
-.perc .pad-active {
+.perc .active-pad {
   background-color: #2885fe;
 }
-.cowbell .pad-active {
+.cowbell .active-pad {
   background-color: #fecf28;
 }
-.shaker .pad-active {
+.shaker .active-pad {
   background-color: #ff65cb;
 }
-.clap .pad-active {
+.clap .active-pad {
   background-color: #65c1ff;
 }
-.crash .pad-active {
+.crash .active-pad {
   background-color: #65ffed;
 }
-.tom .pad-active {
+.tom .active-pad {
   background-color: #65ffa5;
 } */
 
-.pad-active.bar {
+.active-pad.bar {
   background-color: #ec1515;
 }
 
 .pad:hover.pad,
-.pad:hover.pad.pad-active {
+.pad:hover.pad.active-pad {
   background-color: #ffbebe;
 }
 
