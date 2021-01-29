@@ -2,6 +2,7 @@
 class BeatMaker {
   constructor() {
     this.container = document.querySelector(".beatmaker");
+    this.tracks = [];
     this.trackList = [];
 
     // PLAYER VARIABLES
@@ -20,7 +21,7 @@ class BeatMaker {
         this.trackList.push(track.label);
       });
       this.trackList = new Set(this.trackList);
-      this.beatMakerInit();
+      this.render();
 
       // BEATMAKER INTRO ANIMATION
       gsap.to(".track", {
@@ -152,14 +153,16 @@ class BeatMaker {
     this.stopBtn = document.querySelector(".stop-btn");
   }
 
-  beatMakerInit() {
+  render() {
     this.trackList.forEach((trackName) => {
       const track = new Track(trackName);
-      this.container.appendChild(track.tag);
+      track.parentBeatMaker = this.container;
+      track.render();
+      this.tracks.push(track);
     });
   }
 }
 
 // CREATE AND INITIALIZE THE BEATMAKER
 const beatMaker = new BeatMaker();
-beatMaker.beatMakerInit();
+// beatMaker.render();

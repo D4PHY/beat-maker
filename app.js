@@ -18,6 +18,8 @@ async function importLib() {
   return lib;
 }
 
+importLib();
+
 // ANIMATE PAGE UI
 const timeline = gsap.timeline({ defaults: { duration: 1 } });
 timeline

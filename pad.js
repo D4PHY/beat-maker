@@ -13,6 +13,7 @@ class Pad {
       this.container.classList.remove("active-pad");
     } else {
       this.container.classList.add("active-pad");
+      this.activated = true;
     }
   }
 
@@ -28,6 +29,6 @@ class Pad {
     this.container.addEventListener("click", () => {
       this.toggleActivated();
     });
-    this.parentTrack.container.appendChild(this.container);
+    this.parentTrack.padsContainer.appendChild(this.container);
   }
 }
