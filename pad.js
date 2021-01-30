@@ -22,9 +22,10 @@ class Pad {
   }
 
   render() {
-    this.container = document.createElement("div");
+    this.container = document.createElement("DIV");
     this.container.classList.add("pad");
-    this.audioPlayer = document.createElement("audio");
+    this.audioPlayer = document.createElement("AUDIO");
+    this.audioPlayer.src = this.parentTrack.currentSound;
     this.container.appendChild(this.audioPlayer);
     this.container.addEventListener("click", () => {
       this.toggleActivated();
