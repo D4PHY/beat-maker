@@ -1,7 +1,6 @@
 // PAD - SMALLEST BEATMAKER UNIT
 class Pad {
   constructor() {
-    this.selectedSound = null;
     this.container = null;
     this.parentTrack = null;
     this.audioPlayer = null;
@@ -17,8 +16,8 @@ class Pad {
     }
   }
 
-  updateSound(soundName) {
-    this.audioPlayer.src = soundName;
+  updateSound(newSound) {
+    this.audioPlayer.src = newSound;
   }
 
   render() {

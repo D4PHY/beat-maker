@@ -68,8 +68,9 @@ class Track {
   }
 
   changeSound(e) {
-    console.log(this.currentSound);
     this.currentSound = `./sounds-library/${e.target.value}`;
-    console.log(this.currentSound);
+    this.pads.forEach((pad) => {
+      pad.updateSound(this.currentSound);
+    });
   }
 }
