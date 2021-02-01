@@ -1,11 +1,15 @@
 // BEATMAKER - A GROUP OF DIFFERENT TRACKS
+
 class BeatMaker {
   constructor() {
     // BEATMAKER VARIABLES
+
     this.container = document.querySelector(".beatmaker");
     this.lib = [];
+    this.tracks = [];
 
     // PLAYER VARIABLES
+
     this.bpm = 300;
     this.index = 0;
     this.step = null;
@@ -15,6 +19,7 @@ class BeatMaker {
     this.isPaused = null;
 
     // SELECT BEATMAKER CONTROLS
+
     this.deleteBtn = document.querySelector(".delete-btn");
     this.saveBtn = document.querySelector(".save-btn");
     this.tempoSlider = document.querySelector(".tempo-slider");
@@ -32,6 +37,7 @@ class BeatMaker {
 
   async importLib() {
     // DATA FECTH FROM LOCAL URL: './sounds-lib.json'
+
     const dataFetch = await fetch("./sounds-lib.json");
     const data = await dataFetch.json();
     data.forEach((data) => {
@@ -62,14 +68,17 @@ class BeatMaker {
         sound.name.includes(trackItem)
       ).source;
       track.render();
+      this.tracks.push(track);
     });
   }
 }
 
 // CREATE AND INITIALIZE THE BEATMAKER
+
 const beatMaker = new BeatMaker();
 
 // ANIMATE PAGE UI
+
 const timeline = gsap.timeline({ defaults: { duration: 1 } });
 timeline
   .from("header", { y: "-100%", ease: "bounce" })

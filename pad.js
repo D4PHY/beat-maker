@@ -1,4 +1,5 @@
 // PAD - SMALLEST BEATMAKER UNIT
+
 class Pad {
   constructor() {
     this.container = null;

@@ -108,21 +108,3 @@ selects.forEach((select) => {
 });
 
 document.addEventListener("DOMContentLoaded", addSounds());
-
-////////////
-///
-// Animate Tracks
-
-gsap.to(".track", {
-  duration: 0.08,
-  opacity: 1,
-  delay: 1.5,
-  stagger: 0.04,
-});
-
-// // ANIMATE PAGE UI
-// const timeline = gsap.timeline({ defaults: { duration: 1 } });
-// timeline
-//   .from("header", { y: "-100%", ease: "bounce" })
-//   .fromTo(".beatmaker-tools, .media-controls", { opacity: 0 }, { opacity: 1 })
-//   .from("footer", { y: "100", ease: "elastic" });
