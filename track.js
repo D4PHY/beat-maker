@@ -11,50 +11,19 @@ class Track {
     this.currentSound = null;
   }
 
-  render() {
-    // Create Track
+  changeSound(e) {
+    this.currentSound = `./sounds-library/${e.target.value}`;
+    this.pads.forEach((pad) => {
+      pad.updateSound(this.currentSound);
+    });
+  }
 
-    this.container = document.createElement("DIV");
-    this.container.classList.add("track", this.name);
-
-    // Create Select inside Track
-
-    this.select = new Select();
-    this.select.parentTrack = this;
-    this.select.render();
-
-    // Create Pads inside Track
-
-    this.padsContainer = document.createElement("DIV");
-    this.padsContainer.classList.add("pads");
-    for (let i = 0; i < this.padNum; i++) {
-      const pad = new Pad();
-      pad.parentTrack = this;
-      pad.render();
-      this.pads.push(pad);
-    }
-
-    this.container.appendChild(this.padsContainer);
-
-    // Create Mute Buttons inside Track
-
-    this.muteBtnContainer = document.createElement("DIV");
-    this.muteBtnContainer.classList.add("mute-btn", `${this.name}-mute-btn`);
-    this.muteBtnContainer.innerHTML = `<button class="volume-off-btn"></button>`;
-    this.container.appendChild(this.muteBtnContainer);
-
-    this.parentBeatMaker.container.appendChild(this.container);
-
-    // Animate Track with GSAP
-
-    this.animateTrack();
-
-    // Add Event Listeners
-    ///
-    // Adding Event Listeners to a future DOM Element using Event Bubbling (Event Delegation):
-
-    this.addCustomEventListener(`option.opt-${this.name}`, "click", (e) => {
-      this.changeSound(e);
+  animateTrack() {
+    gsap.to(".track", {
+      duration: 0.08,
+      opacity: 1,
+      delay: 1.5,
+      stagger: 0.04,
     });
   }
 
@@ -76,19 +45,49 @@ class Track {
     );
   }
 
-  changeSound(e) {
-    this.currentSound = `./sounds-library/${e.target.value}`;
-    this.pads.forEach((pad) => {
-      pad.updateSound(this.currentSound);
-    });
-  }
+  render() {
+    // Create Track
 
-  animateTrack() {
-    gsap.to(".track", {
-      duration: 0.08,
-      opacity: 1,
-      delay: 1.5,
-      stagger: 0.04,
+    this.container = document.createElement("DIV");
+    this.container.classList.add("track", this.name);
+
+    // Create Select inside Track
+
+    this.select = new Select();
+    this.select.parentTrack = this;
+    this.select.render();
+
+    // Create Pads inside Track
+
+    this.padsContainer = document.createElement("DIV");
+    this.padsContainer.classList.add("pads");
+    for (let i = 0; i < this.padNum; i++) {
+      const pad = new Pad();
+      pad.parentTrack = this;
+      pad.render();
+      pad.container.classList.add(`p${i}`);
+      this.pads.push(pad);
+    }
+
+    this.container.appendChild(this.padsContainer);
+
+    // Create Mute Buttons inside Track
+
+    this.muteBtnContainer = document.createElement("DIV");
+    this.muteBtnContainer.classList.add("mute-btn", `${this.name}-mute-btn`);
+    this.muteBtnContainer.innerHTML = `<button class="volume-off-btn"></button>`;
+    this.container.appendChild(this.muteBtnContainer);
+
+    this.parentBeatMaker.container.appendChild(this.container);
+
+    // Animate Track with GSAP
+
+    this.animateTrack();
+
+    // Adding Event Listeners to a future DOM Element using Event Bubbling (Event Delegation):
+
+    this.addCustomEventListener(`option.opt-${this.name}`, "click", (e) => {
+      this.changeSound(e);
     });
   }
 }

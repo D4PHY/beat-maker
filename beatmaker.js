@@ -33,6 +33,19 @@ class BeatMaker {
     document.addEventListener("DOMContentLoaded", () => {
       this.importLib();
     });
+
+    this.playBtn.addEventListener("click", () => {
+      this.play();
+    });
+
+    this.stopBtn.addEventListener("click", () => {
+      console.log("hmmmmmm weird");
+      this.stop();
+    });
+
+    this.pauseBtn.addEventListener("click", () => {
+      this.pause();
+    });
   }
 
   async importLib() {
@@ -49,6 +62,73 @@ class BeatMaker {
       });
     });
     this.render();
+  }
+
+  play() {
+    if (!this.isPaused) {
+      this.repeater(this.index);
+    } else if (this.isPaused) {
+      this.repeater(this.currentStep);
+      this.isPaused = null;
+    }
+  }
+
+  repeater(actualStep) {
+    // Access Track property padNum to create a repeater function that counts from 0 to padNum value
+
+    const padNum = this.tracks[0].padNum;
+
+    this.step = actualStep % padNum;
+
+    this.repeat = setInterval(() => {
+      this.activeBar(this.step);
+      // playSound();
+      if (!this.isPaused) {
+        console.log(this.step);
+        this.step++;
+        if (this.step === padNum) {
+          this.step = 0;
+        }
+      } else {
+        this.activeBar(this.currentStep);
+        console.log(this.currentStep);
+        this.currentStep++;
+        if (this.currentStep === padNum) {
+          this.currentStep = 0;
+        }
+      }
+    }, this.bpm);
+  }
+
+  activeBar(step) {
+    console.log("active bar step");
+    this.tracks.forEach((track) => {
+      track.pads.forEach((pad) => {
+        if (pad.container.classList.contains(`p${step}`)) {
+          pad.container.classList.add("bar");
+          if (pad.container.classList.contains("active-pad")) {
+            pad.audioPlayer.play();
+          }
+        } else {
+          pad.container.classList.remove("bar");
+        }
+      });
+    });
+  }
+
+  stop() {
+    clearInterval(this.repeat);
+    console.log("stop");
+  }
+
+  pause() {
+    this.isPaused = true;
+    clearInterval(this.repeat);
+
+    // RECORD CURRENT STEP TO BE PASSED TO THE PLAY() [WE DON'T WANT TO START FROM BEGINING]
+
+    this.currentStep = this.step;
+    console.log("pause", this.isPaused);
   }
 
   render() {
