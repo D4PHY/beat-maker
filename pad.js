@@ -11,6 +11,7 @@ class Pad {
   toggleActivated() {
     if (this.activated) {
       this.container.classList.remove("active-pad");
+      this.activated = false;
     } else {
       this.container.classList.add("active-pad");
       this.activated = true;
