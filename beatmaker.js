@@ -39,7 +39,6 @@ class BeatMaker {
     });
 
     this.stopBtn.addEventListener("click", () => {
-      console.log("hmmmmmm weird");
       this.stop();
     });
 
@@ -82,7 +81,6 @@ class BeatMaker {
 
     this.repeat = setInterval(() => {
       this.activeBar(this.step);
-      // playSound();
       if (!this.isPaused) {
         console.log(this.step);
         this.step++;

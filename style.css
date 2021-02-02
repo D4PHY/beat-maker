@@ -176,6 +176,8 @@ select {
 select option {
   background-color: #941818;
   color: #ffeeee;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
 
 /* CAUTION: Internet Explorer hackery ahead */

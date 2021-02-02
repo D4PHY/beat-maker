@@ -19,7 +19,6 @@ class Pad {
 
   updateSound(newSound) {
     this.audioPlayer.src = newSound;
-    console.log("update sound funct");
   }
 
   render() {

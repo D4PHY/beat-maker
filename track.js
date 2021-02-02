@@ -56,6 +56,7 @@ class Track {
     this.select = new Select();
     this.select.parentTrack = this;
     this.select.render();
+    this.select.container.classList.add(`${this.name}-select`);
 
     // Create Pads inside Track
 
@@ -80,14 +81,14 @@ class Track {
 
     this.parentBeatMaker.container.appendChild(this.container);
 
+    // Adding Event Listeners to a future DOM Element using Event Bubbling (Event Delegation):
+
+    this.addCustomEventListener(`.${this.name}-select`, "change", (e) => {
+      this.changeSound(e);
+    });
+
     // Animate Track with GSAP
 
     this.animateTrack();
-
-    // Adding Event Listeners to a future DOM Element using Event Bubbling (Event Delegation):
-
-    this.addCustomEventListener(`option.opt-${this.name}`, "click", (e) => {
-      this.changeSound(e);
-    });
   }
 }
