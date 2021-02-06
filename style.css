@@ -420,6 +420,10 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .bpm-text {
+  min-width: 4rem;
+  display: inline-block;
+  position: relative;
+  left: 0.43rem;
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;

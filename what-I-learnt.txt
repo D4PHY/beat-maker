@@ -11,3 +11,8 @@ ES6 provides the Set object, which makes things a whole lot easier:
 const duplicates = ["mama", "tata", "mama", "dafi", "nicu", "tata"]; // mama, tata, mama, dafi, nicu, tata
 duplicates = new Set(duplicates); // mama, tata, dafi, nicu
 
+4. Select Events
+Not a good ideea to put event handlers on select option (aka, selector: "option", event: "click"
+- it seems to somehow work in Firefox, but not in Chrome),
+more reliable is to add a "change" event on the "select" and use its value.
+

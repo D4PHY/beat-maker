@@ -10,13 +10,16 @@ class BeatMaker {
 
     // PLAYER VARIABLES
 
-    this.bpm = 300;
+    this.bpmInput = 150;
+    this.bpmInterval = (60 / this.bpmInput) * 1000;
     this.index = 0;
     this.step = null;
     this.currentStep = null;
     this.repeat = null;
     this.isPlaying = null;
+    this.wasPlaying = null;
     this.isPaused = null;
+    this.isStopped = null;
 
     // SELECT BEATMAKER CONTROLS
 
@@ -45,6 +48,14 @@ class BeatMaker {
     this.pauseBtn.addEventListener("click", () => {
       this.pause();
     });
+
+    this.tempoSlider.addEventListener("change", (e) => {
+      this.changeTempo(e);
+    });
+
+    this.tempoSlider.addEventListener("input", (e) => {
+      this.updateBPI(e);
+    });
   }
 
   async importLib() {
@@ -64,11 +75,22 @@ class BeatMaker {
   }
 
   play() {
-    if (!this.isPaused) {
+    if (!this.isPlaying && !this.isPaused && !this.isStopped) {
       this.repeater(this.index);
-    } else if (this.isPaused) {
+      this.currentStep = this.step;
+      this.isPlaying = true;
+    } else if (!this.isPlaying && this.isPaused) {
       this.repeater(this.currentStep);
+      this.isPlaying = true;
+      this.wasPlaying = false;
       this.isPaused = null;
+    } else if (!this.isPlaying && this.isStopped) {
+      this.repeater(this.index);
+      this.isPlaying = true;
+      this.wasPlaying = false;
+      this.isStopped = null;
+    } else if (this.isPlaying && !this.isPaused && !this.isStopped) {
+      this.wasPlaying = true;
     }
   }
 
@@ -95,7 +117,7 @@ class BeatMaker {
           this.currentStep = 0;
         }
       }
-    }, this.bpm);
+    }, this.bpmInterval);
   }
 
   activeBar(step) {
@@ -115,18 +137,35 @@ class BeatMaker {
   }
 
   stop() {
+    this.isStopped = true;
+    this.isPlaying = null;
     clearInterval(this.repeat);
     console.log("stop");
   }
 
   pause() {
     this.isPaused = true;
+    this.isPlaying = null;
     clearInterval(this.repeat);
 
     // RECORD CURRENT STEP TO BE PASSED TO THE PLAY() [WE DON'T WANT TO START FROM BEGINING]
 
     this.currentStep = this.step;
     console.log("pause", this.isPaused);
+  }
+
+  updateBPI(e) {
+    this.bpmText.textContent = e.target.value;
+  }
+
+  changeTempo(e) {
+    console.log("change tempo");
+    console.log(this.bpmInput, this.bpmInterval);
+    this.bpmInput = e.target.value;
+    if (this.isPlaying) {
+      clearInterval(this.repeat);
+      this.play();
+    }
   }
 
   render() {
