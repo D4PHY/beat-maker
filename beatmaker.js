@@ -16,10 +16,9 @@ class BeatMaker {
     this.step = null;
     this.currentStep = null;
     this.repeat = null;
-    this.isPlaying = null;
-    this.wasPlaying = null;
-    this.isPaused = null;
-    this.isStopped = null;
+    this.isPlaying = false;
+    this.isPaused = false;
+    this.isStopped = true;
 
     // SELECT BEATMAKER CONTROLS
 
@@ -75,23 +74,21 @@ class BeatMaker {
   }
 
   play() {
-    if (!this.isPlaying && !this.isPaused && !this.isStopped) {
-      this.repeater(this.index);
-      this.currentStep = this.step;
-      this.isPlaying = true;
-    } else if (!this.isPlaying && this.isPaused) {
-      this.repeater(this.currentStep);
-      this.isPlaying = true;
-      this.wasPlaying = false;
-      this.isPaused = null;
-    } else if (!this.isPlaying && this.isStopped) {
-      this.repeater(this.index);
-      this.isPlaying = true;
-      this.wasPlaying = false;
-      this.isStopped = null;
-    } else if (this.isPlaying && !this.isPaused && !this.isStopped) {
-      this.wasPlaying = true;
+    if (this.isPlaying) {
+      return;
     }
+
+    if (this.isPaused) {
+      this.repeater(this.currentStep);
+    }
+
+    if (this.isStopped) {
+      this.repeater(this.index);
+    }
+
+    this.isPlaying = true;
+    this.isStopped = false;
+    this.isPaused = false;
   }
 
   repeater(actualStep) {
@@ -162,8 +159,10 @@ class BeatMaker {
     console.log("change tempo");
     console.log(this.bpmInput, this.bpmInterval);
     this.bpmInput = e.target.value;
-    if (this.isPlaying) {
+    if (this.isPlaying || this.wasPlaying) {
       clearInterval(this.repeat);
+      this.isPlaying = null;
+      this.wasPlaying = null;
       this.play();
     }
   }
