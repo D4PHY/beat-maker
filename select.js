@@ -6,8 +6,9 @@ class Select {
 
   render() {
     this.container = document.createElement("SELECT");
+    this.container.classList.add(`${this.parentTrack.name}-select`);
 
-    // GENERATE DATA FOR SELECTS
+    // Generate data for selects
 
     this.parentTrack.parentBeatMaker.lib.forEach((sound) => {
       if (sound.label === this.parentTrack.name) {

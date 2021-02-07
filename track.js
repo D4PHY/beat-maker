@@ -56,7 +56,6 @@ class Track {
     this.select = new Select();
     this.select.parentTrack = this;
     this.select.render();
-    this.select.container.classList.add(`${this.name}-select`); //move this to select's render
 
     // Create Pads inside Track
 

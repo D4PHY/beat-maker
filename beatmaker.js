@@ -11,7 +11,6 @@ class BeatMaker {
     // PLAYER VARIABLES
 
     this.bpmInput = 150;
-    this.bpmInterval = (60 / this.bpmInput) * 1000;
     this.index = 0;
     this.step = null;
     this.currentStep = null;
@@ -19,6 +18,7 @@ class BeatMaker {
     this.isPlaying = false;
     this.isPaused = false;
     this.isStopped = true;
+    this.tempoChanged = false;
 
     // SELECT BEATMAKER CONTROLS
 
@@ -49,11 +49,11 @@ class BeatMaker {
     });
 
     this.tempoSlider.addEventListener("change", (e) => {
-      this.changeTempo(e);
+      this.updateTempo(e);
     });
 
     this.tempoSlider.addEventListener("input", (e) => {
-      this.updateBPI(e);
+      this.changeTempo(e);
     });
   }
 
@@ -86,9 +86,14 @@ class BeatMaker {
       this.repeater(this.index);
     }
 
+    if (this.tempoChanged) {
+      this.repeater(this.currentStep);
+    }
+
     this.isPlaying = true;
     this.isStopped = false;
     this.isPaused = false;
+    this.tempoChanged = false;
   }
 
   repeater(actualStep) {
@@ -114,7 +119,7 @@ class BeatMaker {
           this.currentStep = 0;
         }
       }
-    }, this.bpmInterval);
+    }, (60 / this.bpmInput) * 1000);
   }
 
   activeBar(step) {
@@ -135,34 +140,36 @@ class BeatMaker {
 
   stop() {
     this.isStopped = true;
-    this.isPlaying = null;
+    this.isPlaying = false;
     clearInterval(this.repeat);
     console.log("stop");
   }
 
   pause() {
     this.isPaused = true;
-    this.isPlaying = null;
+    this.isPlaying = false;
     clearInterval(this.repeat);
 
-    // RECORD CURRENT STEP TO BE PASSED TO THE PLAY() [WE DON'T WANT TO START FROM BEGINING]
+    // Record current step to be passed to play() [with pause, we don't want to start at the begining]
 
     this.currentStep = this.step;
     console.log("pause", this.isPaused);
   }
 
-  updateBPI(e) {
+  changeTempo(e) {
     this.bpmText.textContent = e.target.value;
   }
 
-  changeTempo(e) {
-    console.log("change tempo");
-    console.log(this.bpmInput, this.bpmInterval);
+  updateTempo(e) {
     this.bpmInput = e.target.value;
-    if (this.isPlaying || this.wasPlaying) {
+
+    if (this.isPlaying) {
+      this.tempoChanged = true;
+
+      this.isPlaying = false;
       clearInterval(this.repeat);
-      this.isPlaying = null;
-      this.wasPlaying = null;
+
+      this.currentStep = this.step;
       this.play();
     }
   }
