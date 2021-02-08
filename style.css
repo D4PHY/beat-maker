@@ -160,8 +160,9 @@ select {
   max-width: 24rem;
   padding: 0.5rem 2rem 0.5rem 2rem;
   margin-right: 2rem;
+  text-transform: uppercase;
+  font-size: 1.6rem;
   font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
   border: 0.1rem transparent;
   background-color: #941818 !important;
   color: #ffeeee;
@@ -227,9 +228,14 @@ select::-ms-expand {
   background-color: #ffeeee;
 }
 
+.muted-pad,
+.mute-btn-active {
+  opacity: 0.66;
+}
+
 .track:hover .pad,
 .track:hover li,
-.track:hover .mute-btn,
+.track:hover,
 .track li:hover .track {
   color: #0c1514;
 }

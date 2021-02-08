@@ -18,6 +18,20 @@ class Track {
     });
   }
 
+  muteTrack(e) {
+    this.pads.forEach((pad) => {
+      if (!pad.container.classList.contains("muted-pad")) {
+        e.target.classList.add("mute-btn-active");
+        pad.container.classList.add("muted-pad");
+        pad.audioPlayer.volume = 0;
+      } else {
+        e.target.classList.remove("mute-btn-active");
+        pad.container.classList.remove("muted-pad");
+        pad.audioPlayer.volume = 1;
+      }
+    });
+  }
+
   animateTrack() {
     gsap.to(".track", {
       duration: 0.08,
@@ -84,6 +98,12 @@ class Track {
 
     this.addCustomEventListener(`.${this.name}-select`, "change", (e) => {
       this.changeSound(e);
+    });
+
+    // Mute Track
+
+    this.addCustomEventListener(`.${this.name}-mute-btn`, "click", (e) => {
+      this.muteTrack(e);
     });
 
     // Animate Track with GSAP

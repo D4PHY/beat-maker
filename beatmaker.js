@@ -18,7 +18,7 @@ class BeatMaker {
     this.isPlaying = false;
     this.isPaused = false;
     this.isStopped = true;
-    this.tempoChanged = false;
+    this.tempoUpdated = false;
 
     // SELECT BEATMAKER CONTROLS
 
@@ -55,6 +55,10 @@ class BeatMaker {
     this.tempoSlider.addEventListener("input", (e) => {
       this.changeTempo(e);
     });
+
+    this.deleteBtn.addEventListener("click", () => {
+      this.deleteSelection();
+    });
   }
 
   async importLib() {
@@ -86,14 +90,14 @@ class BeatMaker {
       this.repeater(this.index);
     }
 
-    if (this.tempoChanged) {
+    if (this.tempoUpdated) {
       this.repeater(this.currentStep);
     }
 
     this.isPlaying = true;
     this.isStopped = false;
     this.isPaused = false;
-    this.tempoChanged = false;
+    this.tempoUpdated = false;
   }
 
   repeater(actualStep) {
@@ -164,7 +168,7 @@ class BeatMaker {
     this.bpmInput = e.target.value;
 
     if (this.isPlaying) {
-      this.tempoChanged = true;
+      this.tempoUpdated = true;
 
       this.isPlaying = false;
       clearInterval(this.repeat);
@@ -172,6 +176,19 @@ class BeatMaker {
       this.currentStep = this.step;
       this.play();
     }
+  }
+
+  deleteSelection() {
+    this.tracks.forEach((track) => {
+      track.pads.forEach((pad) => {
+        if (pad.container.classList.contains("muted-pad")) {
+          pad.container.classList.remove("muted-pad");
+        }
+        if (pad.container.classList.contains("active-pad")) {
+          pad.container.classList.remove("active-pad");
+        }
+      });
+    });
   }
 
   render() {
