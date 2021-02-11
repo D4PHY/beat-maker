@@ -4,6 +4,10 @@ class Select {
     this.parentTrack = null;
   }
 
+  onChange(callback) {
+    this.container.addEventListener("change", callback);
+  }
+
   render() {
     this.container = document.createElement("SELECT");
     this.container.classList.add(`${this.parentTrack.name}-select`);

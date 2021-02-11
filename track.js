@@ -41,24 +41,6 @@ class Track {
     });
   }
 
-  addCustomEventListener(selector, event, handler) {
-    const domElement = document.querySelector(".beatmaker");
-    domElement.addEventListener(
-      event,
-      function (e) {
-        let targetElement = e.target;
-        while (targetElement != null) {
-          if (targetElement.matches(selector)) {
-            handler(e);
-            return;
-          }
-          targetElement = targetElement.parentElement;
-        }
-      },
-      true
-    );
-  }
-
   render() {
     // Create Track
 
@@ -70,6 +52,9 @@ class Track {
     this.select = new Select();
     this.select.parentTrack = this;
     this.select.render();
+    this.select.onChange((e) => {
+      this.changeSound(e);
+    });
 
     // Create Pads inside Track
 
@@ -96,13 +81,9 @@ class Track {
 
     // Adding Event Listeners to a future DOM Element using Event Bubbling (Event Delegation):
 
-    this.addCustomEventListener(`.${this.name}-select`, "change", (e) => {
-      this.changeSound(e);
-    });
-
     // Mute Track
 
-    this.addCustomEventListener(`.${this.name}-mute-btn`, "click", (e) => {
+    addDelegatedEvent(`.${this.name}-mute-btn`, "click", (e) => {
       this.muteTrack(e);
     });
 
