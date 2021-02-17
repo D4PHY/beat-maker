@@ -30,10 +30,16 @@ class BeatMaker {
     this.playBtn = document.querySelector(".play-btn");
     this.stopBtn = document.querySelector(".stop-btn");
 
+    // SELECT OTHER BEATMAKER COMPONENTS
+
+    this.myBeatsCollection = document.querySelectorAll(".navigation ul li");
+    this.myBeats = [];
+
     // ADD EVENT LISTENERS
 
     document.addEventListener("DOMContentLoaded", () => {
       this.importLib();
+      // this.getLocalBeats();
     });
 
     this.playBtn.addEventListener("click", () => {
@@ -58,6 +64,18 @@ class BeatMaker {
 
     this.deleteBtn.addEventListener("click", () => {
       this.deleteSelection();
+    });
+
+    this.saveBtn.addEventListener("click", () => {
+      this.saveSelection();
+    });
+
+    this.myBeatsCollection.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        this.deleteSelection();
+        this.repaintBeatMaker(e);
+        console.log("muah");
+      });
     });
   }
 
@@ -146,7 +164,15 @@ class BeatMaker {
     this.isStopped = true;
     this.isPlaying = false;
     clearInterval(this.repeat);
-    console.log("stop");
+
+    this.tracks.forEach((track) => {
+      track.pads.forEach((pad) => {
+        if (pad.container.classList.contains("bar")) {
+          pad.container.classList.remove("bar");
+          console.log("remove bar");
+        }
+      });
+    });
   }
 
   pause() {
@@ -180,12 +206,83 @@ class BeatMaker {
 
   deleteSelection() {
     this.tracks.forEach((track) => {
-      track.pads.forEach((pad) => {
+      console.log("the track", track);
+      const result = track.pads.map((pad) => {
         if (pad.container.classList.contains("muted-pad")) {
           pad.container.classList.remove("muted-pad");
         }
         if (pad.container.classList.contains("active-pad")) {
           pad.container.classList.remove("active-pad");
+        }
+      });
+    });
+    this.stop();
+  }
+
+  saveSelection() {
+    const selectedPads = [];
+
+    this.tracks.forEach((track) => {
+      const result = track.pads.map((pad, index) => {
+        if (pad.container.classList.contains("active-pad")) {
+          selectedPads.push({
+            trackOption: track.currentSound,
+            padPosition: index,
+            padType: track.name,
+          });
+        }
+      });
+    });
+
+    const beatName = prompt("Your beat name..");
+    const newBeat = new MyBeat();
+    newBeat.padsSequence = selectedPads;
+    newBeat.name = beatName;
+    this.myBeats.push(newBeat);
+    newBeat.render();
+
+    // Save selection in local storage
+
+    const saveToLocalCollection = (myBeat) => {
+      console.log("new beat", newBeat);
+      let savedBeats;
+      console.log(this.myBeats);
+      if (localStorage.getItem("myBeatCollection") === null) {
+        savedBeats = [];
+      } else {
+        savedBeats = JSON.parse(localStorage.getItem("myBeatCollection"));
+      }
+
+      savedBeats.push(myBeat);
+
+      localStorage.setItem("myBeatCollection", JSON.stringify(savedBeats));
+
+      // Save selections <LI> in DOM <UL> list
+
+      savedBeats.forEach((item) => {
+        console.log("item", item);
+        const showBeat = new MyBeat();
+        showBeat.name = item.name;
+        showBeat.padsSequence = item.padsSequence;
+        showBeat.render();
+      });
+    };
+
+    saveToLocalCollection(newBeat);
+  }
+
+  repaintBeatMaker(padsSequence) {
+    console.log("repaint beatmaker", padsSequence);
+
+    padsSequence.forEach((padSaved) => {
+      this.tracks.forEach((track) => {
+        console.log(track);
+        if (track.name === padSaved.padType) {
+          track.pads.forEach((pad, index) => {
+            if (index === padSaved.padPosition) {
+              pad.container.classList.add("active-pad");
+            }
+          });
         }
       });
     });
@@ -224,3 +321,5 @@ timeline
   .from("header", { y: "-100%", ease: "bounce" })
   .fromTo(".beatmaker-tools, .media-controls", { opacity: 0 }, { opacity: 1 })
   .from("footer", { y: "100", ease: "elastic" });
+
+// localStorage.clear();

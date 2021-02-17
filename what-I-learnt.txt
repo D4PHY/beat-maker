@@ -12,15 +12,30 @@ const duplicates = ["mama", "tata", "mama", "dafi", "nicu", "tata"]; // mama, ta
 duplicates = new Set(duplicates); // mama, tata, dafi, nicu
 
 4. Select Events
-Not a good ideea to put event handlers on select option (aka, selector: "option", event: "click"
-- it seems to somehow work in Firefox, but not in Chrome),
+Not a good ideea to put event handlers on select option (aka, selector: "option", event: "click".
+It seems to somehow work in Firefox, but not in Chrome),
 more reliable is to add a "change" event on the "select" and use its value.
 
 5. Boolean vs. Null
 Use boolean data type and not null when you want to check for true and false (even if null is falsey).
-With "null" we expect an object or not an object (nothing)
+With "null" we expect an object or not an object (nothing).
 
 6. The 'return' statement
 Better use a design pattern in which you will exit functions that check for multiple conditions as soon as possible
-(when it hits true)
+(when it hits true).
+
+7. forEach vs. map
+Choose wisely between these two methods when working with arrays!
+You might prefer map(), if you favor functional programming, as map() will return a new brand array (it returns, implicitly),
+not modifying the original one & you might prefer forEach(), if you don't need to change the array data, but you need to save it
+to a database or just logging it out.
+Another important aspect is the speed of the 2 methods: map is faster, so it's usefull in situations in which we need to nest loops:
+choose to nest a map inside a forEach vs. nest a forEach inside a forEach, for better speed performance.
+
+Key Takeaways: just about anyhting you can do with forEach(), you can do with map(), and vise versa but
+1. map allocates memory and stores return values; forEach throws away return values and always returns undefined.
+2. forEach will allow a callback function to mutate the current array; map will instead return a new array.
+
+Important resource to test js methods speed performance: jsPerf.
+
 
