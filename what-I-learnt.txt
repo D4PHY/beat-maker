@@ -1,30 +1,37 @@
 1. parentNode.append()
+
 appendChild() vs append() : append() method will insert a javascript Node object
 and also a DomString object after the last child of a parent node.
 
 2. Remove everything after a certain character
+
 const song = "kick-mama.wav"; // kick-mama.wav
 const songLabel = song.split("-")[0]; // kick
 
 3. Remove duplicate values from JS array
+
 ES6 provides the Set object, which makes things a whole lot easier:
 const duplicates = ["mama", "tata", "mama", "dafi", "nicu", "tata"]; // mama, tata, mama, dafi, nicu, tata
 duplicates = new Set(duplicates); // mama, tata, dafi, nicu
 
 4. Select Events
+
 Not a good ideea to put event handlers on select option (aka, selector: "option", event: "click".
 It seems to somehow work in Firefox, but not in Chrome),
 more reliable is to add a "change" event on the "select" and use its value.
 
 5. Boolean vs. Null
+
 Use boolean data type and not null when you want to check for true and false (even if null is falsey).
 With "null" we expect an object or not an object (nothing).
 
 6. The 'return' statement
+
 Better use a design pattern in which you will exit functions that check for multiple conditions as soon as possible
 (when it hits true).
 
-7. forEach vs. map
+7. forEach vs. map (?)
+
 Choose wisely between these two methods when working with arrays!
 You might prefer map(), if you favor functional programming, as map() will return a new brand array (it returns, implicitly),
 not modifying the original one & you might prefer forEach(), if you don't need to change the array data, but you need to save it
@@ -38,4 +45,25 @@ Key Takeaways: just about anyhting you can do with forEach(), you can do with ma
 
 Important resource to test js methods speed performance: jsPerf.
 
+8. How to convert a string of numbers to an array of numbers?
 
+const str = "0,0,1,4|2,0,0,7";
+str = str.split("|"); // ["0,0,1,4", "2,0,0,7"]
+str = str.split(",")[0]; // ["0", "0", "1", "4"]
+vs. using map:
+str = str.split(",")[1].map((val) => return Number(val)); // [2, 0, 0, 7]
+
+
+9. This is how I programmatically set the value of a select box element using JavaScript:
+
+<select id="my-select" name="my-select">
+    <option value="1">First Item</option>
+    <option value="2">First Item</option>
+</select>
+
+function selectOption(el, optionValue) {
+    el = document.getElementById("my-select");
+    el.value = optionValue;
+}
+
+selectOption("my-select", "2");

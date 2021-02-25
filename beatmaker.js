@@ -22,24 +22,24 @@ class BeatMaker {
 
     // SELECT BEATMAKER CONTROLS
 
-    this.deleteBtn = document.querySelector(".delete-btn");
-    this.saveBtn = document.querySelector(".save-btn");
-    this.tempoSlider = document.querySelector(".tempo-slider");
     this.bpmText = document.querySelector(".bpm-text");
     this.pauseBtn = document.querySelector(".pause-btn");
     this.playBtn = document.querySelector(".play-btn");
     this.stopBtn = document.querySelector(".stop-btn");
+    this.tempoSlider = document.querySelector(".tempo-slider");
+    this.deleteBtn = document.querySelector(".delete-btn");
+    this.saveBtn = document.querySelector(".save-btn");
 
-    // SELECT OTHER BEATMAKER COMPONENTS
+    // SAVE "MYBEATS" VARIABLES
 
-    this.myBeatsCollection = document.querySelectorAll(".navigation ul li");
-    this.myBeats = [];
+    this.myBeatIndex = 1;
+    this.myCollection = [];
 
     // ADD EVENT LISTENERS
 
     document.addEventListener("DOMContentLoaded", () => {
       this.importLib();
-      // this.getLocalBeats();
+      // this.loadMyCollection();
     });
 
     this.playBtn.addEventListener("click", () => {
@@ -68,14 +68,6 @@ class BeatMaker {
 
     this.saveBtn.addEventListener("click", () => {
       this.saveSelection();
-    });
-
-    this.myBeatsCollection.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        this.deleteSelection();
-        this.repaintBeatMaker(e);
-        console.log("muah");
-      });
     });
   }
 
@@ -206,7 +198,6 @@ class BeatMaker {
 
   deleteSelection() {
     this.tracks.forEach((track) => {
-      console.log("the track", track);
       const result = track.pads.map((pad) => {
         if (pad.container.classList.contains("muted-pad")) {
           pad.container.classList.remove("muted-pad");
@@ -220,72 +211,64 @@ class BeatMaker {
   }
 
   saveSelection() {
-    const selectedPads = [];
+    const myBeat = new MyBeat();
 
-    this.tracks.forEach((track) => {
-      const result = track.pads.map((pad, index) => {
-        if (pad.container.classList.contains("active-pad")) {
-          selectedPads.push({
-            trackOption: track.currentSound,
-            padPosition: index,
-            padType: track.name,
-          });
-        }
-      });
-    });
+    // Save myBeat name
+    myBeat.name = prompt("Give your beat a name");
 
-    const beatName = prompt("Your beat name..");
-    const newBeat = new MyBeat();
-    newBeat.padsSequence = selectedPads;
-    newBeat.name = beatName;
-    this.myBeats.push(newBeat);
-    newBeat.render();
-
-    // Save selection in local storage
-
-    const saveToLocalCollection = (myBeat) => {
-      console.log("new beat", newBeat);
-      let savedBeats;
-      console.log(this.myBeats);
-      if (localStorage.getItem("myBeatCollection") === null) {
-        savedBeats = [];
-      } else {
-        savedBeats = JSON.parse(localStorage.getItem("myBeatCollection"));
+    if (myBeat.name !== null) {
+      if (myBeat.name === "") {
+        myBeat.name = `My beat no. ${this.myBeatIndex}`;
+        this.myBeatIndex += 1;
       }
 
-      savedBeats.push(myBeat);
+      // Save myBeats parameteres: selected sound index | active pads (from 0 to num. of pads * num. of tracks)
 
-      localStorage.setItem("myBeatCollection", JSON.stringify(savedBeats));
+      const selectedSounds = [];
+      const activePads = [];
 
-      // Save selections <LI> in DOM <UL> list
+      this.tracks.forEach((track, trackIndex) => {
+        selectedSounds.push(track.currentSoundIndex);
 
-      savedBeats.forEach((item) => {
-        console.log("item", item);
-        const showBeat = new MyBeat();
-        showBeat.name = item.name;
-        showBeat.padsSequence = item.padsSequence;
-        showBeat.render();
+        track.pads.forEach((pad, padIndex) => {
+          if (pad.activated) {
+            activePads.push(track.padNum * trackIndex + padIndex);
+          }
+        });
       });
-    };
 
-    saveToLocalCollection(newBeat);
+      myBeat.url = selectedSounds.join(",") + "|" + activePads.join(",");
+
+      this.myCollection.push(myBeat);
+      console.log(myBeat, "collection:", this.myCollection);
+
+      myBeat.render();
+    }
   }
 
-  repaintBeatMaker(padsSequence) {
-    console.log("repaint beatmaker", padsSequence);
+  loadSelection(myBeat) {
+    // We want to use deconstruction, so we don't repeat with split("|") two times
 
-    padsSequence.forEach((padSaved) => {
-      this.tracks.forEach((track) => {
-        console.log(track);
-        if (track.name === padSaved.padType) {
-          track.pads.forEach((pad, index) => {
-            if (index === padSaved.padPosition) {
-              pad.container.classList.add("active-pad");
-            }
-          });
+    let [selectedSounds, activePads] = myBeat.url.split("|");
+    selectedSounds = selectedSounds.split(",").map((val) => Number(val));
+
+    activePads = activePads.split(",").map((val) => Number(val));
+
+    console.log(selectedSounds, activePads);
+
+    selectedSounds.forEach((sound, soundIndex) => {
+      this.tracks.forEach((track, trackIndex) => {
+        if (soundIndex === trackIndex) {
+          if (sound !== 0) {
+            track.select.repaintSelect(sound);
+          }
         }
       });
     });
+
+    // activePads.forEach((pad, padIndex) => {
+    //   this.tracks.pads.
+    // });
   }
 
   render() {

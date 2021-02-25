@@ -9,12 +9,25 @@ class Track {
     this.container = null;
     this.select = null;
     this.currentSound = null;
+    this.currentSoundIndex = 0;
   }
 
   changeSound(e) {
     this.currentSound = `./sounds-library/${e.target.value}`;
     this.pads.forEach((pad) => {
       pad.updateSound(this.currentSound);
+    });
+
+    // Update currentSoundIndex
+
+    this.updateCurrentSoundIndex(e.target.value);
+  }
+
+  updateCurrentSoundIndex(newVal) {
+    this.select.selectOptions.forEach((option, optionIndex) => {
+      if (option.value === newVal) {
+        this.currentSoundIndex = optionIndex;
+      }
     });
   }
 

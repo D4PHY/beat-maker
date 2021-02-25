@@ -2,10 +2,15 @@ class Select {
   constructor() {
     this.container = null;
     this.parentTrack = null;
+    this.selectOptions = [];
   }
 
   onChange(callback) {
     this.container.addEventListener("change", callback);
+  }
+
+  repaintSelect(sound) {
+    this.container.value = this.selectOptions[sound].value;
   }
 
   render() {
@@ -21,6 +26,7 @@ class Select {
         option.value = sound.name;
         const optionContent = sound.name.split(".")[0];
         option.textContent = optionContent;
+        this.selectOptions.push(option);
         this.container.appendChild(option);
       }
     });

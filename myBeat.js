@@ -1,18 +1,18 @@
 class MyBeat {
   constructor() {
-    this.container = null;
-    this.parent = document.querySelector(".navigation ul");
-    this.padsSequence = [];
     this.name = null;
+    this.url = "";
+
+    this.parent = document.querySelector(".my-collection");
   }
 
-  render(myBeatsName) {
-    this.container = document.createElement("LI");
-    this.container.innerHTML = `<button>${this.name}</button>`;
-    this.container.addEventListener("click", (e) => {
+  render() {
+    const container = document.createElement("LI");
+    container.innerHTML = `<button>${this.name}</button>`;
+    container.addEventListener("click", (e) => {
       beatMaker.deleteSelection();
-      beatMaker.repaintBeatMaker(this.padsSequence);
+      beatMaker.loadSelection(this);
     });
-    this.parent.appendChild(this.container);
+    this.parent.appendChild(container);
   }
 }
