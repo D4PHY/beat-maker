@@ -247,11 +247,13 @@ class BeatMaker {
   }
 
   loadSelection(myBeat) {
+    // We packed our matrix with saveSelection (myBeat.url) and now we want to despached it (matrix to vector and vector to matrix)
+
     // We want to use deconstruction, so we don't repeat with split("|") two times
 
     let [selectedSounds, activePads] = myBeat.url.split("|");
-    selectedSounds = selectedSounds.split(",").map((val) => Number(val));
 
+    selectedSounds = selectedSounds.split(",").map((val) => Number(val));
     activePads = activePads.split(",").map((val) => Number(val));
 
     console.log(selectedSounds, activePads);
@@ -266,9 +268,22 @@ class BeatMaker {
       });
     });
 
-    // activePads.forEach((pad, padIndex) => {
-    //   this.tracks.pads.
-    // });
+    activePads.forEach((activePad) => {
+      this.tracks.forEach((track, trackIndex) => {
+        const activeTrackIndex = Math.floor(activePad / track.padNum);
+        console.log("Active track:", activeTrackIndex);
+        if (trackIndex === activeTrackIndex) {
+          let activePadIndex = activeTrackIndex * track.padNum - activePad;
+          activePadIndex *= -1;
+
+          track.pads.forEach((pad, padIndex) => {
+            if (padIndex === activePadIndex) {
+              pad.container.classList.add("active-pad");
+            }
+          });
+        }
+      });
+    });
   }
 
   render() {
