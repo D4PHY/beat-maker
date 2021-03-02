@@ -11,6 +11,7 @@ class Select {
 
   repaintSelect(sound) {
     this.container.value = this.selectOptions[sound].value;
+    console.log(sound);
   }
 
   render() {

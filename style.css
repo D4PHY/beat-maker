@@ -72,7 +72,7 @@ header {
 } */
 
 .navigation li:hover {
-  color: #ec1515;
+  color: #a0a0a0;
 }
 
 .navigation li:hover .navigation li:last-child::before {
@@ -132,17 +132,17 @@ main {
 }
 
 .delete-btn:hover {
-  color: #ec1515;
+  color: #a0a0a0;
 }
 
 button.save-btn {
   background-color: #ffeeee;
-  color: #941818;
+  color: #3d3b3b;
   padding: 1.5rem 4.5rem;
 }
 
 .save-btn:hover {
-  background-color: #ec1515;
+  background-color: #a0a0a0;
   color: #ffeeee;
 }
 
@@ -164,7 +164,8 @@ select {
   font-size: 1.6rem;
   font-family: "Poppins", sans-serif;
   border: 0.1rem transparent;
-  background-color: #e80a0a !important;
+  background-color: #3d3b3b !important;
+  border-bottom: 0.2rem solid #ffeeee;
   color: #ffeeee;
   height: 3.4rem;
   font-weight: 700;
@@ -212,7 +213,7 @@ select::-ms-expand {
   box-sizing: border-box;
   border-radius: 0.2rem;
   /* Create notched corners */
-  /*   --notchSize: 0.7rem;
+  /* --notchSize: 0.4rem;
   clip-path: polygon(
     0% var(--notchSize),
     var(--notchSize) 0%,
@@ -256,47 +257,57 @@ select::-ms-expand {
   background-color: #ffeeee;
 }
 
-/* .kick .active-pad {
-  background-color: #9665ff;
-}
-.snare .active-pad {
-  background-color: #d6ff65;
-}
-.hihat .active-pad {
-  background-color: #ed65ff;
-}
-.openhat .active-pad {
-  background-color: #7bff65;
-}
-.ride .active-pad {
-  background-color: red;
-}
-.perc .active-pad {
-  background-color: #2885fe;
-}
-.cowbell .active-pad {
-  background-color: #fecf28;
-}
-.shaker .active-pad {
-  background-color: #ff65cb;
-}
 .clap .active-pad {
-  background-color: #65c1ff;
+  background-color: #e81d62;
 }
+
+.cowbell .active-pad {
+  background-color: #9b26af;
+}
+
 .crash .active-pad {
-  background-color: #65ffed;
+  background-color: #3e50b4;
 }
+
+.hihat .active-pad {
+  background-color: #00bbd3;
+}
+
+.kick .active-pad {
+  background-color: #009587;
+}
+
+.openhat .active-pad {
+  background-color: #8ac249;
+}
+
+.perc .active-pad {
+  background-color: #feea3a;
+}
+
+.ride .active-pad {
+  background-color: #fe9700;
+}
+
+.shaker .active-pad {
+  background-color: #f34235;
+}
+
+.snare .active-pad {
+  background-color: #9b26af;
+}
+
 .tom .active-pad {
-  background-color: #65ffa5;
-} */
+  background-color: #2095f2;
+}
 
 .active-pad.bar {
-  background-color: #ec1515;
+  background-color: #ffeeee;
 }
 
 .pad:hover.pad,
 .pad:hover.pad.active-pad {
-  background-color: #e80a0a;
+  background-color: #ffeeee;
 }
 
 .bar {
@@ -349,23 +360,23 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 1.2rem;
   cursor: pointer;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  background: #ffeeee;
-  border: 0px solid #ec1515;
+  background: #616161;
+  border: 0px solid #ffeeee;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  border: 0px solid #ec1515;
+  border: 0px solid #ffeeee;
   height: 2rem;
   width: 4rem;
-  background: #ec1515;
+  background: #ffeeee;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -3.6px;
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #ffeeee;
+  background: #616161;
 }
 
 input[type="range"]::-moz-range-track {
@@ -374,17 +385,17 @@ input[type="range"]::-moz-range-track {
   cursor: pointer;
   border-radius: 0;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  background: #ffeeee;
-  border: 0px solid #ec1515;
+  background: #616161;
+  border: 0px solid #ffeeee;
 }
 
 input[type="range"]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
   border-radius: 0;
-  border: 0px solid #ec1515;
+  border: 0px solid #ffeeee;
   height: 2rem;
   width: 4rem;
-  background: #ec1515;
+  background: #ffeeee;
   cursor: pointer;
 }
 
@@ -399,32 +410,32 @@ input[type="range"]::-ms-track {
 }
 
 input[type="range"]::-ms-fill-lower {
-  background: #ffeeee;
-  border: 0px solid #ec1515;
+  background: #616161;
+  border: 0px solid #ffeeee;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
 }
 
 input[type="range"]::-ms-fill-upper {
-  background: #ffeeee;
+  background: #616161;
   border: 0px solid #0c1514;
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
 }
 
 input[type="range"]::-ms-thumb {
   box-shadow: 0px 0px 0px #0c1514, 0px 0px 0px #0c1514;
-  border: 0px solid #ec1515;
+  border: 0px solid #ffeeee;
   height: 2rem;
   width: 4rem;
-  background: #ec1515;
+  background: #ffeeee;
   cursor: pointer;
 }
 
 input[type="range"]:focus::-ms-fill-lower {
-  background: #ffeeee;
+  background: #616161;
 }
 
 input[type="range"]:focus::-ms-fill-upper {
-  background: #ffeeee;
+  background: #616161;
 }
 
 .bpm-text {
@@ -468,6 +479,6 @@ footer {
   padding: 4rem 0;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ec1515;
+  color: #ffeeee;
   text-align: right;
 }

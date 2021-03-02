@@ -155,6 +155,7 @@ class BeatMaker {
   stop() {
     this.isStopped = true;
     this.isPlaying = false;
+    this.isPaused = false;
     clearInterval(this.repeat);
 
     this.tracks.forEach((track) => {
@@ -170,6 +171,7 @@ class BeatMaker {
   pause() {
     this.isPaused = true;
     this.isPlaying = false;
+    this.isStopped = false;
     clearInterval(this.repeat);
 
     // Record current step to be passed to play() [with pause, we don't want to start at the begining]
@@ -263,6 +265,24 @@ class BeatMaker {
         if (soundIndex === trackIndex) {
           if (sound !== 0) {
             track.select.repaintSelect(sound);
+
+            // Change source for all pads:
+
+            track.pads.forEach((pad) => {
+              pad.updateSound(
+                `./sounds-library/${track.select.selectOptions[sound].innerText}.wav`
+              );
+            });
+          } else {
+            track.select.repaintSelect(0);
+
+            // Change source for all pads:
+
+            track.pads.forEach((pad) => {
+              pad.updateSound(
+                `./sounds-library/${track.select.selectOptions[0].innerText}.wav`
+              );
+            });
           }
         }
       });
@@ -271,10 +291,13 @@ class BeatMaker {
     activePads.forEach((activePad) => {
       this.tracks.forEach((track, trackIndex) => {
         const activeTrackIndex = Math.floor(activePad / track.padNum);
-        console.log("Active track:", activeTrackIndex);
+
         if (trackIndex === activeTrackIndex) {
-          let activePadIndex = activeTrackIndex * track.padNum - activePad;
-          activePadIndex *= -1;
+          // let activePadIndex = activePad - activeTrackIndex * track.padNum;
+
+          // or.. just like the activeBar step, using modulo:
+
+          let activePadIndex = activePad % track.padNum;
 
           track.pads.forEach((pad, padIndex) => {
             if (padIndex === activePadIndex) {
